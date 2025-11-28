@@ -135,7 +135,22 @@ int main()
   int choice;
   do {
     printMenu();
-  }
-
+    choice = getUserChoice();
+    switch (choice) {
+      case 1:
+      // control with computer
+        printActionMenu();
+        break;
+      case 2:
+      // go from file
+        readFile();
+        break;
+      case 3:
+        exit(0); //might change this because apparently its unsafe.
+        break;
+      default:
+        std::cout << "Invalid choice.\n";
+    }
+  } while (choice != 3);
 
 }
