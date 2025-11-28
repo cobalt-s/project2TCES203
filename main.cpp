@@ -1,7 +1,16 @@
+/**
+ * Main.cpp
+ * Author: Cobalt Stamey
+ *
+ * This is the main program for the file of Project 2.
+ */
+
 #include <iostream>
 #include <string>
 
-
+/**
+ * Prints the main menu;
+ */
 void printMenu()
 {
   std::cout << "Menu: Car Controller" << "\n";
@@ -11,6 +20,9 @@ void printMenu()
   std::cout << "(3) Quit" << "\n";
 }
 
+/**
+ * Prints the action menu.
+ */
 void printActionMenu()
 {
   std::cout << "\nActions" << "\n";
@@ -99,6 +111,10 @@ static bool readLine(std::string &out)
   return true;
 }
 
+/**
+ * Gets the users choice from the terminal.
+ * @return the users choice in int form
+ */
 int getUserChoice() {
   int choice;
   std::cout << "Enter your choice: ";
