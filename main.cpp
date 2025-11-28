@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <iostream>
+#include <string>
+
 
 void printMenu()
 {
@@ -24,12 +26,28 @@ void printActionMenu()
   std::cout << "Choose an action:" << "\n";
 }
 
+/**
+ * lets us know if we can read a line.
+ */
+static bool readLine(std::string &out)
+{
+  if(!std::getline(std::cin, out))
+  {
+    std::cout << "\nInput closed. Exiting.\n";
+    return false;
+  }
+  return true;
+}
+
 
 
 int main()
 {
-  int choice;
-  printMenu();
+
+  while (true)
+  {
+    printMenu();
+  }
 
 
 }
