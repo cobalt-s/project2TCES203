@@ -1,19 +1,23 @@
-#include "Motor.h"
-#include <algorithm>   
-#include <cmath>    
+#include "Motor.h"  
 #include <string>
-
-
+/**
+ * Main code file used to represent one of the motors for an RC car
+ * 
+ * Jonathan Lee
+ * TCES 203 A
+ * Project 2
+ */
 
  /**
   * Parameter-less constructor for the nameless Motor
   */
-Motor::Motor(): name("unnamed"), speedPercent(0), enabled(false) { }
+Motor::Motor(): name("unnamed"), speedPercent(0), enabled(false), direction(Direction::Stop) { }
 
 /**
  * Parameter-less constructor for a named Motor
  */
-Motor::Motor(const std::string& motorName): name(motorName), speedPercent(0), enabled(false) { }
+Motor::Motor(const std::string& motorName): name(motorName), speedPercent(0), enabled(false), 
+            direction(Direction::Stop) { }
 
 /**
  * Used to set the current speed of the motor.
@@ -29,6 +33,9 @@ void Motor::setSpeed(int newSpeedPercent) {
         speedPercent = newSpeedPercent;
 }
 
+/**
+ * Used to set the current direction of the motor.
+ */
 void Motor::setDirection(Direction newDirection) {
     if (newDirection == Direction::Forward || newDirection == Direction::Backward ||
         newDirection == Direction::Left || newDirection == Direction::Right ||
@@ -42,6 +49,20 @@ void Motor::setDirection(Direction newDirection) {
  */
 int Motor::getSpeed() const {
     return speedPercent;
+}
+
+/**
+ * Used to retrieve the name of the motor.
+ */
+std::string Motor::getName() const {
+    return name;
+}
+
+/**
+ * Used to retrieve the current direction of the motor.
+ */
+Direction Motor::getDirection() const {
+    return direction;
 }
 
 /**
@@ -64,11 +85,4 @@ void Motor::disable() {
  */
 bool Motor::isEnabled() const {
     return enabled;
-}
-
-/**
- * Used to retrieve the name of the motor.
- */
-std::string Motor::getName() const {
-    return name;
 }
