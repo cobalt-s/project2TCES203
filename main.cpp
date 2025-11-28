@@ -18,8 +18,8 @@ void printActionMenu()
   std::cout << "(R) Right" << "\n";
   std::cout << "(B) Backward" << "\n";
   std::cout << "(F) Forward" << "\n";
-  std::cout << "(S) Forward" << "\n";
-  std::cout << "(L) Forward" << "\n";
+  std::cout << "(S) Stop" << "\n";
+  std::cout << "(K) Loop" << "\n";
   std::cout << "(E) Exit to main menu" << "\n";
   std::cout << "Choose an action:" << "\n";
 }
