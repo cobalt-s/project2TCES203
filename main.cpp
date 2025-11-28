@@ -9,7 +9,6 @@ void printMenu()
   std::cout << "(1) Control with computer" << "\n";
   std::cout << "(2) Test with a file " << "\n";
   std::cout << "(3) Quit" << "\n";
-  std::cout << "(3) Quit" << "\n";
 }
 
 void printActionMenu()
