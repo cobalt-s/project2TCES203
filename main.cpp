@@ -39,7 +39,16 @@ static bool readLine(std::string &out)
   return true;
 }
 
-
+int getUserChoice() {
+  int choice;
+  std::cout << "Enter your choice: ";
+  if (!(std::cin >> choice)) {
+    std::cin.clear();
+    std::cin.ignore(10000, '\n');
+    return -1;
+  }
+  return choice;
+}
 
 int main()
 {
