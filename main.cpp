@@ -70,9 +70,8 @@ void readFile(std::string &speed, std::string &cameraMode) {
 
 int main()
 {
-
-  while (true)
-  {
+  int choice;
+  do {
     printMenu();
   }
 
