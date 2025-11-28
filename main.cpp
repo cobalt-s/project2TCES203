@@ -25,6 +25,68 @@ void printActionMenu()
 }
 
 /**
+ * This function allows you to move the car in a specific direction.
+ * @param direction the direction to move the car.
+ */
+void moveCar(char direction)
+{
+  switch (direction) {
+    case 'L':
+      std::cout << "Moving car left" << "\n";
+      //TODO: add implementation to this movement.
+      break;
+    case 'R':
+      std::cout << "Moving car right" << "\n";
+      //TODO: add implementation to this movement.
+      break;
+    case 'B':
+      std::cout << "Moving car backwards" << "\n";
+      //TODO: add implementation to this movement.
+      break;
+    case 'F':
+      std::cout << "Moving car forwards" << "\n";
+      //TODO: add implementation to this movement.
+      break;
+    case 'S':
+      std::cout << "Moving car stop" << "\n";
+      //TODO: add implementation to this movement.
+      break;
+    default:
+      std::cout << "Invalid action" << "\n";
+      break;
+  }
+
+}
+
+/**
+ * This is the action loop for the car moving.
+ * @return 0 if it runs good, 1 if it runs bad.
+ */
+int actionLoop()
+{
+  char choice;
+  do {
+    printActionMenu();
+    std::cin >> choice; //TODO: make this safe.
+
+    if (choice == 'K') {
+      //might want to change movecar to let you choose how many times that could be fun.
+      moveCar('L');
+      moveCar('F');
+      moveCar('L');
+      moveCar('F');
+      moveCar('L');
+      moveCar('F');
+      return 0;
+    }else {
+      moveCar(choice);
+    }
+  } while (choice != 'E');
+
+  return 0;
+}
+
+/**
  * lets us know if we can read a line.
  */
 static bool readLine(std::string &out)
