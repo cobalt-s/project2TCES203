@@ -3,9 +3,11 @@
 #include <string>
 
 /**
- * Represents a motor for a car (particularly an RC car for Project 2)
+ * Header file for a motor of an RC car
  * 
  * Jonathan Lee
+ * TCES 203 A
+ * Project 2
  */
 
 /**
@@ -36,6 +38,7 @@ public:
     void setSpeed(int newSpeedPercent);
     void setDirection(Direction newDirection);
     int getSpeed() const;
+    Direction getDirection() const;
 
     void enable();
     void disable();
