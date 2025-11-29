@@ -6,7 +6,7 @@
 #include <iostream>
 
 namespace UserInterface {
-    void printMenu()
+    void printMainMenu()
     {
         std::cout << "Menu: Car Controller" << "\n";
         std::cout << "Which mode would you like to enter?" << "\n";

@@ -13,9 +13,13 @@ class Controller {
         // user gets to control the car.
         void userControl();
         // a test file controls the car.
-        void fileControl();
+        static void fileControl();
         // helps with getting the menu choice.
-        int getUserChoice();
+        static int getUserChoiceInt();
+
+        static char getUserChoiceChar();
+
+        void moveCar(char direction);
 };
 
 #endif //CONTROLLER_H
