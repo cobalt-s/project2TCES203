@@ -160,6 +160,25 @@ void readFile(std::string &speed, std::string &cameraMode) {
   // }
 }
 
+
+void readConfigFile(std::string &speed, std::string &cameraMode) {
+  std::ifstream config("config.txt");
+  if (!config) {
+    std::cout << "No configuration file found; using defaults.\n";
+    return;
+  }
+  std::string line;
+  while (getline(config, line)) {
+    // Very simple parsing: expect lines like "key=value"
+    size_t eq = line.find('=');
+    if (eq == std::string::npos) continue;
+    std::string key = line.substr(0, eq);
+    std::string value = line.substr(eq + 1);
+    if (key == "speed") speed = value;
+    else if (key == "camera_mode") cameraMode = value;
+  }
+}
+
 int main()
 {
   int choice;
