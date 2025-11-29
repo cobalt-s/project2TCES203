@@ -13,4 +13,6 @@ add_executable(PROJECT2TCES203
         UserInterface.h
         Controller.cpp
         Controller.h
+        LogFile.cpp
+        LogFile.h
 )

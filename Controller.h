@@ -8,17 +8,39 @@
 class Controller {
     public:
         Controller() = default;
+
+        /**
+         * Main run for the controller.
+         */
         void run();
     private:
-        // user gets to control the car.
+        /**
+         * User control for the car.
+         */
         void userControl();
-        // a test file controls the car.
+
+        /**
+         * File control for the car.
+         */
         static void fileControl();
-        // helps with getting the menu choice.
+
+        /**
+         * gets the user choice in INT format
+         * @return int: the users choice
+         */
         static int getUserChoiceInt();
 
+
+        /**
+         * gets the user choice in CHAR format
+         * @return char: the users choice
+         */
         static char getUserChoiceChar();
 
+        /**
+         * Moves the car based on a direction.
+         * @param direction the direction you want to move the car.
+         */
         void moveCar(char direction);
 };
 
