@@ -11,6 +11,19 @@
  * Project 2
  */
 
+/**
+ * Camera for the RC car
+ */
+class Camera {
+    private:
+        bool streaming;
+    public:
+        void startStreaming();
+        void stopStreaming();
+        void captureFrame();
+        bool isStreaming() const;
+};
+
 // Enumerated type for high-level movement commands.
 enum class MovementCommand {
     MoveForward,
@@ -47,49 +60,50 @@ struct CarSnapshot {
  * Main class for representing a four-wheeled RC car
  */
 class Car {
-private:
-    Motor frontLeft;
-    Motor frontRight;
-    Motor rearLeft;
-    Motor rearRight;
+    private:
+        Motor frontLeft;
+        Motor frontRight;
+        Motor rearLeft;
+        Motor rearRight;
 
-    double x;           // current x position
-    double y;           // current y position
-    double headingDeg;  // current heading in degrees [0, 360)
+        double x;           // current x position
+        double y;           // current y position
+        double headingDeg;  // current heading in degrees [0, 360)
+        Camera camera;
 
-    void updatePose(double dx, double dy, double dThetaDeg);
+        void updatePose(double dx, double dy, double dThetaDeg);
 
-public:
-    Car();
+    public:
+        Car();
 
-    void moveForward(double distance);
-    void moveBackward(double distance);
-    void strafeLeft(double distance);
-    void strafeRight(double distance);
-    void rotateLeft(double angleDeg);
-    void rotateRight(double angleDeg);
+        void moveForward(double distance);
+        void moveBackward(double distance);
+        void strafeLeft(double distance);
+        void strafeRight(double distance);
+        void rotateLeft(double angleDeg);
+        void rotateRight(double angleDeg);
 
-    void stopAllMotors();
+        void stopAllMotors();
 
-    void cameraOn();
-    void cameraOff();
+        void cameraOn();
+        void cameraOff();
 
-    double getX() const;
-    double getY() const;
-    double getHeadingDeg() const;
+        double getX() const;
+        double getY() const;
+        double getHeadingDeg() const;
 
-    Motor getFrontLeftMotor() const;
-    Motor getFrontRightMotor() const;
-    Motor getRearLeftMotor() const;
-    Motor getRearRightMotor() const;
+        Motor getFrontLeftMotor() const;
+        Motor getFrontRightMotor() const;
+        Motor getRearLeftMotor() const;
+        Motor getRearRightMotor() const;
 
-    // New in Activity 14:
-    // Apply a high-level movement command using an enum.
-    void applyCommand(MovementCommand cmd, double value);
+        // New in Activity 14:
+        // Apply a high-level movement command using an enum.
+        void applyCommand(MovementCommand cmd, double value);
 
-    // New in Activity 14:
-    // Return a CarSnapshot that captures the full current state.
-    CarSnapshot getSnapshot() const;
+        // New in Activity 14:
+        // Return a CarSnapshot that captures the full current state.
+        CarSnapshot getSnapshot() const;
 };
 
 #endif

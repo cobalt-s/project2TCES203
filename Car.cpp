@@ -3,102 +3,63 @@
 #include <cmath>       // std::fmod
 
 /**
- * Coding Activity 14
+ * Main code file used to represent a four-wheeled RC Car
  * 
  * Jonathan Lee
+ * TCES 203 A
+ * Project 2
  */
 
-// --------------------
-// Motor implementation
-// --------------------
-
-Motor::Motor()
-    : name("unnamed"), speedPercent(0), enabled(false)
+ /**
+  * Represents a Pi Camera for the car.
+  */
+Camera::Camera()
+    : streaming(false)
 {
 }
 
-Motor::Motor(const std::string& motorName)
-    : name(motorName), speedPercent(0), enabled(false)
+/**
+ * Start streaming from the camera.
+ */
+void Camera::startStreaming()
 {
+    streaming = true;
 }
 
-void Motor::setSpeed(int newSpeedPercent)
+/**
+ * Stop streaming from the camera.
+ */
+void Camera::stopStreaming()
 {
-if (newSpeedPercent > 100)
-    speedPercent = 100;
-else if (newSpeedPercent < -100)
-    speedPercent = -100;
-else
-    speedPercent = newSpeedPercent;
-
+    streaming = false;
 }
 
-int Motor::getSpeed() const
+/**
+ * Check to see if the camera is still running.
+ */
+bool Camera::isStreaming() const
 {
-    return speedPercent;
+    return streaming;
 }
 
-void Motor::enable()
-{
-    enabled = true;
-}
-
-void Motor::disable()
-{
-    enabled = false;
-    speedPercent = 0;
-}
-
-bool Motor::isEnabled() const
-{
-    return enabled;
-}
-
-std::string Motor::getName() const
-{
-    return name;
-}
-
-// -----------------------
-// PiCamera implementation
-// -----------------------
-
-// PiCamera::PiCamera()
-//     : streaming(false)
-// {
-// }
-
-// void PiCamera::startStream()
-// {
-//     streaming = true;
-// }
-
-// void PiCamera::stopStream()
-// {
-//     streaming = false;
-// }
-
-// bool PiCamera::isStreaming() const
-// {
-//     return streaming;
-// }
-
-// ------------------------
-// Car implementation
-// ------------------------
-
+/**
+ * Constructor for a four-wheeled RC car
+ */
 Car::Car()
     : frontLeft("front-left"),
       frontRight("front-right"),
       rearLeft("rear-left"),
       rearRight("rear-right"),
-    //   camera(),
+      camera(),
       x(0.0),
       y(0.0),
       headingDeg(0.0)
 {
 }
 
+/**
+ * Used to update the car's position on a 2D grid.
+ */
 void Car::updatePose(double dx, double dy, double dThetaDeg)
 {
     x += dx;
@@ -112,6 +73,9 @@ void Car::updatePose(double dx, double dy, double dThetaDeg)
     }
 }
 
+/**
+ * Move the car forward in its current direction.
+ */
 void Car::moveForward(double distance)
 {
     // Forward increases y
@@ -128,6 +92,9 @@ void Car::moveForward(double distance)
     rearRight.enable();
 }
 
+/**
+ * Back the car up in its current direction.
+ */
 void Car::moveBackward(double distance)
 {
     updatePose(0.0, -distance, 0.0);
@@ -142,6 +109,9 @@ void Car::moveBackward(double distance)
     rearRight.enable();
 }
 
+/**
+ * Have the car strafe to the left from its current position.
+ */
 void Car::strafeLeft(double distance)
 {
     updatePose(-distance, 0.0, 0.0);
@@ -157,6 +127,9 @@ void Car::strafeLeft(double distance)
     rearRight.enable();
 }
 
+/**
+ * Have the car strafe to the right from its current position.
+ */
 void Car::strafeRight(double distance)
 {
     updatePose(distance, 0.0, 0.0);
@@ -171,6 +144,9 @@ void Car::strafeRight(double distance)
     rearRight.enable();
 }
 
+/**
+ * Rotate the car to the left in its current position. 
+ */
 void Car::rotateLeft(double angleDeg)
 {
     updatePose(0.0, 0.0, angleDeg);
@@ -185,6 +161,9 @@ void Car::rotateLeft(double angleDeg)
     rearRight.enable();
 }
 
+/**
+ * Rotate the car to the right in its current position.
+ */
 void Car::rotateRight(double angleDeg)
 {
     updatePose(0.0, 0.0, -angleDeg);
@@ -199,6 +178,9 @@ void Car::rotateRight(double angleDeg)
     rearRight.enable();
 }
 
+/**
+ * Stop the car!!!
+ */
 void Car::stopAllMotors()
 {
     frontLeft.setSpeed(0);
@@ -212,51 +194,80 @@ void Car::stopAllMotors()
     rearRight.disable();
 }
 
-// void Car::cameraOn()
-// {
-//     camera.startStream();
-// }
+/**
+ * Turn the car's camera on.
+ */
+void Car::cameraOn()
+{
+    camera.startStreaming();
+}
 
-// void Car::cameraOff()
-// {
-//     camera.stopStream();
-// }
+/**
+ * Turn the car's camera off.
+ */
+void Car::cameraOff()
+{
+    camera.stopStreaming();
+}
 
+/**
+ * Return the car's x-coordinate.
+ */
 double Car::getX() const
 {
     return x;
 }
 
+/**
+ * Return the car's y-coordinate.
+ */
 double Car::getY() const
 {
     return y;
 }
 
+/**
+ * Return the car's heading degree.
+ */
 double Car::getHeadingDeg() const
 {
     return headingDeg;
 }
 
+/**
+ * Return the car's front left motor.
+ */
 Motor Car::getFrontLeftMotor() const
 {
     return frontLeft;
 }
-
+/**
+ * Return the car's front right motor.
+ */
 Motor Car::getFrontRightMotor() const
 {
     return frontRight;
 }
 
+/**
+ * Return the car's rear left motor.
+ */
 Motor Car::getRearLeftMotor() const
 {
     return rearLeft;
 }
 
+/**
+ * Return the car's rear right motor.
+ */
 Motor Car::getRearRightMotor() const
 {
     return rearRight;
 }
 
+/**
+ * Return a snapshot of the car at a moment in time.
+ */
 CarSnapshot Car::getSnapshot() const
 {
     CarSnapshot snap;
@@ -264,7 +275,7 @@ CarSnapshot Car::getSnapshot() const
     snap.x = x;
     snap.y = y;
     snap.headingDeg = headingDeg;
-    // snap.cameraStreaming = camera.isStreaming();
+    snap.cameraStreaming = camera.isStreaming();
 
     snap.frontLeft.name = frontLeft.getName();
     snap.frontLeft.speedPercent = frontLeft.getSpeed();
@@ -285,6 +296,9 @@ CarSnapshot Car::getSnapshot() const
     return snap;
 }
 
+/**
+ * Method used to have the car perform a given command (moving, strafing, stopping).
+ */
 void Car::applyCommand(MovementCommand cmd, double value)
 {
     switch (cmd) {
