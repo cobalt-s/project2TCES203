@@ -9,4 +9,5 @@ add_executable(PROJECT2TCES203
     Car.cpp
     Motor.cpp
     Simulator.cpp
+        main.h
 )

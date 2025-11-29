@@ -79,7 +79,7 @@ int actionLoop()
   char choice;
   do {
     printActionMenu();
-    std::cin >> choice; //TODO: make this safe.
+    choice =
 
     if (choice == 'K') {
       //might want to change movecar to let you choose how many times that could be fun.
@@ -101,7 +101,7 @@ int actionLoop()
 /**
  * lets us know if we can read a line.
  */
-static bool readLine(std::string &out)
+bool readLine(std::string &out)
 {
   if(!std::getline(std::cin, out))
   {
@@ -123,6 +123,20 @@ int getUserChoice() {
     std::cin.ignore(10000, '\n');
     return -1;
   }
+  return choice;
+}
+
+char getUserChoiceChar() {
+  char choice;
+  std::cout << "Enter your choice: ";
+
+  if (!(std::cin >> choice)) {
+    std::cin.clear();
+    std::cin.ignore(10000, '\n');
+    return '\0';
+  }
+
+  std::cin.ignore(10000, '\n');
   return choice;
 }
 
