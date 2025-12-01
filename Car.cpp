@@ -4,6 +4,9 @@
 #include <string>
 #include <iostream>
 
+#define DISTANCE = 15;
+#define ANGLE = 5;
+
 /**
  * Main code file used to represent a four-wheeled RC Car
  * 
@@ -391,26 +394,24 @@ void Car::applyCommand(MovementCommand cmd, double value)
  */
 void Car::applyCommand(MovementCommand cmd)
 {
-    const double distance = 10; // meters?
-    const double angle = 5;
     switch (cmd) {
     case MovementCommand::MoveForward:
-        moveForward(distance);
+        moveForward(DISTANCE);
         break;
     case MovementCommand::MoveBackward:
-        moveBackward(distance);
+        moveBackward(DISTANCE);
         break;
     case MovementCommand::StrafeLeft:
-        strafeLeft(distance);
+        strafeLeft(DISTANCE);
         break;
     case MovementCommand::StrafeRight:
-        strafeRight(distance);
+        strafeRight(DISTANCE);
         break;
     case MovementCommand::RotateLeft:
-        rotateLeft(angle);
+        rotateLeft(ANGLE);
         break;
     case MovementCommand::RotateRight:
-        rotateRight(angle);
+        rotateRight(ANGLE);
         break;
     case MovementCommand::Stop:
         stopAllMotors();

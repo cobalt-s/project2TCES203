@@ -155,6 +155,7 @@ void Controller::moveCar(const char direction, LogFile &logger, Car &currentCar)
             logger.logCamera("CAPTURE TAKEN.");
             currentCar.cameraOn();
             currentCar.cameraOff();
+            break;
     case 'E':
         break;
         default:
