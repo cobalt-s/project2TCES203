@@ -15,7 +15,7 @@ LogFile::LogFile()
     std::filesystem::create_directories("logfiles");
 
     file.open("logfiles/log.txt");
-    file << "LOG START:\n";
+    file << "---LOG START---\n";
 
     //printing the absolute path
     std::filesystem::path logPath = std::filesystem::absolute("logfiles/log.txt");
@@ -27,7 +27,7 @@ LogFile::LogFile()
  */
 LogFile::~LogFile()
 {
-    file << "LOG ENDED:\n";
+    file << "---LOG ENDED---\n";
     file.close();
 }
 

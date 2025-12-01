@@ -76,7 +76,7 @@ Car::Car()
 /**
  * Used to update the car's position on a 2D grid.
  */
-void Car::updatePose(double dx, double dy, double dThetaDeg)
+void Car::updatePose(const double dx, const double dy, const double dThetaDeg)
 {
     x += dx;
     y += dy;
@@ -92,7 +92,7 @@ void Car::updatePose(double dx, double dy, double dThetaDeg)
 /**
  * Move the car forward in its current direction.
  */
-void Car::moveForward(double distance)
+void Car::moveForward(const double distance)
 {
     // Forward increases y
     updatePose(0.0, distance, 0.0);
@@ -116,7 +116,7 @@ void Car::moveForward(double distance)
 /**
  * Back the car up in its current direction.
  */
-void Car::moveBackward(double distance)
+void Car::moveBackward(const double distance)
 {
     updatePose(0.0, -distance, 0.0);
 
@@ -139,7 +139,7 @@ void Car::moveBackward(double distance)
 /**
  * Have the car strafe to the left from its current position.
  */
-void Car::strafeLeft(double distance)
+void Car::strafeLeft(const double distance)
 {
     updatePose(-distance, 0.0, 0.0);
 
@@ -164,7 +164,7 @@ void Car::strafeLeft(double distance)
 /**
  * Have the car strafe to the right from its current position.
  */
-void Car::strafeRight(double distance)
+void Car::strafeRight(const double distance)
 {
     updatePose(distance, 0.0, 0.0);
 
@@ -187,7 +187,7 @@ void Car::strafeRight(double distance)
 /**
  * Rotate the car to the left in its current position. 
  */
-void Car::rotateLeft(double angleDeg)
+void Car::rotateLeft(const double angleDeg)
 {
     updatePose(0.0, 0.0, angleDeg);
 
@@ -210,7 +210,7 @@ void Car::rotateLeft(double angleDeg)
 /**
  * Rotate the car to the right in its current position.
  */
-void Car::rotateRight(double angleDeg)
+void Car::rotateRight(const double angleDeg)
 {
     updatePose(0.0, 0.0, -angleDeg);
 

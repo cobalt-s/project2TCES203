@@ -3,7 +3,7 @@
 
 #include <string>
 
-// pigpio is only for linux so I put this here so it uses our like test library so the code still compiles on windows. 
+// pigpio is only for linux, so I put this here so it uses our like test library so the code still compiles on windows.
 #ifdef _WIN32
     #include "pigpio_mock.h"
 #else

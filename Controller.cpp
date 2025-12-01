@@ -151,6 +151,7 @@ void Controller::moveCar(const char direction, LogFile &logger, Car &currentCar)
     case 'P':
             std::cout << "\n" << "Photo taken" << "\n";
             //TODO: The capture frame needs to be fixed.
+            logger.logCamera("CAPTURE TAKEN.");
             currentCar.cameraOn();
             currentCar.cameraOff();
         default:
