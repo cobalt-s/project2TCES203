@@ -1,6 +1,6 @@
 #include "Car.h"
-#include <algorithm>   
-#include <cmath>       
+#include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <string>
 
@@ -9,15 +9,15 @@
 
 /**
  * Main code file used to represent a four-wheeled RC Car
- * 
+ *
  * Jonathan Lee
  * TCES 203 A
  * Project 2
  */
 
- /**
-  * Represents a camera for the car.
-  */
+/**
+ * Represents a camera for the car.
+ */
 Camera::Camera()
     : streaming(false)
 {
@@ -39,9 +39,10 @@ void Camera::stopStreaming()
     streaming = false;
 }
 
-void Camera::captureFrame(double captureX, double captureY) {
+void Camera::captureFrame(double captureX, double captureY)
+{
     std::cout << "Hello" << "\n";
-    //TODO: Implement captureX, capture Y in Log File and terminal.
+    // TODO: Implement captureX, capture Y in Log File and terminal.
 }
 
 /**
@@ -65,15 +66,15 @@ Car::Car()
       y(0.0),
       headingDeg(0.0)
 {
-    //initalizing motors with the gpio pins for the l298n motor drivers. 
-    // we probably will need to adjust this based on which car we get. 
-    // this may have to change I need to look at the car and what pins they
-    // are in. 
+    // initalizing motors with the gpio pins for the l298n motor drivers.
+    //  we probably will need to adjust this based on which car we get.
+    //  this may have to change I need to look at the car and what pins they
+    //  are in.
 
-    frontLeft.initialize(18, 23, 24); // ENA, IN1, IN2
+    frontLeft.initialize(18, 23, 24);  // ENA, IN1, IN2
     frontRight.initialize(13, 27, 22); // ENB, IN2, IN3
-    rearLeft.initialize(12, 5, 6); // ENC, IN4, IN5
-    rearRight.initialize(12, 5, 6); // END, IN6, IN7
+    rearLeft.initialize(12, 5, 6);     // ENC, IN4, IN5
+    rearRight.initialize(12, 5, 6);    // END, IN6, IN7
 }
 
 /**
@@ -87,7 +88,8 @@ void Car::updatePose(const double dx, const double dy, const double dThetaDeg)
 
     // Normalize heading to [0, 360)
     headingDeg = std::fmod(headingDeg, 360.0);
-    if (headingDeg < 0.0) {
+    if (headingDeg < 0.0)
+    {
         headingDeg += 360.0;
     }
 }
@@ -152,7 +154,7 @@ void Car::strafeLeft(const double distance)
     rearRight.setDirection(Direction::Backward);
 
     // Simple pattern for strafing (not physically accurate, but okay for our GUI)
-    // may need to change this for the actual robot. 
+    // may need to change this for the actual robot.
     frontLeft.setSpeed(-50);
     rearLeft.setSpeed(50);
     frontRight.setSpeed(50);
@@ -188,7 +190,7 @@ void Car::strafeRight(const double distance)
 }
 
 /**
- * Rotate the car to the left in its current position. 
+ * Rotate the car to the left in its current position.
  */
 void Car::rotateLeft(const double angleDeg)
 {
@@ -363,28 +365,29 @@ CarSnapshot Car::getSnapshot() const
  */
 void Car::applyCommand(MovementCommand cmd, double value)
 {
-    switch (cmd) {
-        case MovementCommand::MoveForward:
-            moveForward(value);
-            break;
-        case MovementCommand::MoveBackward:
-            moveBackward(value);
-            break;
-        case MovementCommand::StrafeLeft:
-            strafeLeft(value);
-            break;
-        case MovementCommand::StrafeRight:
-            strafeRight(value);
-            break;
-        case MovementCommand::RotateLeft:
-            rotateLeft(value);
-            break;
-        case MovementCommand::RotateRight:
-            rotateRight(value);
-            break;
-        case MovementCommand::Stop:
-            stopAllMotors();
-            break;
+    switch (cmd)
+    {
+    case MovementCommand::MoveForward:
+        moveForward(value);
+        break;
+    case MovementCommand::MoveBackward:
+        moveBackward(value);
+        break;
+    case MovementCommand::StrafeLeft:
+        strafeLeft(value);
+        break;
+    case MovementCommand::StrafeRight:
+        strafeRight(value);
+        break;
+    case MovementCommand::RotateLeft:
+        rotateLeft(value);
+        break;
+    case MovementCommand::RotateRight:
+        rotateRight(value);
+        break;
+    case MovementCommand::Stop:
+        stopAllMotors();
+        break;
     }
 }
 
@@ -394,7 +397,8 @@ void Car::applyCommand(MovementCommand cmd, double value)
  */
 void Car::applyCommand(MovementCommand cmd)
 {
-    switch (cmd) {
+    switch (cmd)
+    {
     case MovementCommand::MoveForward:
         moveForward(DISTANCE);
         break;
@@ -418,11 +422,3 @@ void Car::applyCommand(MovementCommand cmd)
         break;
     }
 }
-
-
-
-
-
-
-
-

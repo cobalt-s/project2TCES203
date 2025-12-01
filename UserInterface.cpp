@@ -8,7 +8,8 @@
 #include <thread>
 #include <chrono>
 
-namespace UserInterface {
+namespace UserInterface
+{
     void printMainMenu()
     {
         std::cout << "\n=====CAR CONTROLLER=====" << "\n";
@@ -20,7 +21,8 @@ namespace UserInterface {
     }
     void printActionMenu()
     {
-        std::cout << "\n" << std::string(20, '=')  << "ACTION MENU" << std::string(20, '=') << std::endl;
+        std::cout << "\n"
+                  << std::string(20, '=') << "ACTION MENU" << std::string(20, '=') << std::endl;
         std::cout << "(L) Left" << "\n";
         std::cout << "(R) Right" << "\n";
         std::cout << "(Q) Rotate Left" << "\n";
@@ -31,7 +33,6 @@ namespace UserInterface {
         std::cout << "(P) Take Picture" << '\n';
         std::cout << "(X) Exit to main menu" << "\n";
         std::cout << std::string(51, '=') << std::endl;
-
     }
 
     void printExampleMenu()
@@ -44,19 +45,21 @@ namespace UserInterface {
         std::cout << std::string(12, '-') << std::endl;
     }
 
-    void printError(const std::string& message)
+    void printError(const std::string &message)
     {
-        for(int i = 0; i < 1; i++) {
+        for (int i = 0; i < 1; i++)
+        {
             std::cout << " " << std::flush;
             std::this_thread::sleep_for(std::chrono::seconds(1));
         }
         std::cout << "\n[ERROR] " << message << "\n";
     }
 
-    void printInfo(const std::string& message)
+    void printInfo(const std::string &message)
     {
         std::cout << "[INFO] " << message << "\n";
-        for(int i = 0; i < 1; i++) {
+        for (int i = 0; i < 1; i++)
+        {
             std::cout << " " << std::flush;
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
         }

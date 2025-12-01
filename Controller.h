@@ -1,7 +1,3 @@
-//
-// Created by Cobalt Stamey on 11/28/25.
-//
-
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 #include "LogFile.h"

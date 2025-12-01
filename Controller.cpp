@@ -1,7 +1,3 @@
-//
-// Created by Cobalt Stamey on 11/28/25.
-//
-
 #include "Controller.h"
 #include <iostream>
 
@@ -12,24 +8,26 @@
 void Controller::run()
 {
     int choice = 0;
-    do {
+    do
+    {
         UserInterface::printMainMenu();
         choice = getUserChoiceInt();
 
-        switch (choice) {
-            case 1:
-                userControl();
-                break;
-            case 2:
-                fileControl();
-                break;
-            case 3:
-                break;
-            default:
-                UserInterface::printError("Invalid Choice");
-                break;
+        switch (choice)
+        {
+        case 1:
+            userControl();
+            break;
+        case 2:
+            fileControl();
+            break;
+        case 3:
+            break;
+        default:
+            UserInterface::printError("Invalid Choice");
+            break;
         }
-    } while (choice!=3);
+    } while (choice != 3);
 
     UserInterface::printInfo("Exiting Program");
 }
@@ -41,7 +39,8 @@ void Controller::userControl()
     UserInterface::printInfo("Entering User Control mode.");
 
     char choice;
-    do {
+    do
+    {
         UserInterface::printActionMenu();
         choice = getUserChoiceChar();
         Controller::carAction(choice, logger, currentCar);
@@ -60,33 +59,34 @@ void Controller::fileControl()
         choice = getUserChoiceInt();
         switch (choice)
         {
-            case 1:
+        case 1:
             UserInterface::printInfo("Entering Example one");
-            //TODO: enter example one.
+            // TODO: enter example one.
             break;
-            case 2:
+        case 2:
             UserInterface::printInfo("Entering Example two");
-            //TODO: enter example two.
+            // TODO: enter example two.
             break;
-            case 3:
+        case 3:
             UserInterface::printInfo("Entering Example three");
-            //TODO: enter example three.
+            // TODO: enter example three.
             break;
         case 4:
             break;
         default:
             UserInterface::printError("Invalid Choice");
         }
-    }
-    while (choice != 4);
+    } while (choice != 4);
     UserInterface::printInfo("Exiting File Control mode.");
 }
 
-int Controller::getUserChoiceInt() {
+int Controller::getUserChoiceInt()
+{
     std::cout << "Enter your choice (INT): ";
     int choice;
 
-    if (!(std::cin >> choice)) {
+    if (!(std::cin >> choice))
+    {
         std::cin.clear();
         std::cin.ignore(10000, '\n');
         UserInterface::printError("Please enter a valid number.");
@@ -100,11 +100,13 @@ int Controller::getUserChoiceInt() {
  *  Gets the users choice.
  * @return the users choice as a char
  */
-char Controller::getUserChoiceChar() {
+char Controller::getUserChoiceChar()
+{
     std::cout << "Enter your choice(CHAR): ";
     char choice;
 
-    if (!(std::cin >> choice)) {
+    if (!(std::cin >> choice))
+    {
         std::cin.clear();
         std::cin.ignore(10000, '\n');
         UserInterface::printError("Please enter a valid number.");
@@ -122,57 +124,56 @@ char Controller::getUserChoiceChar() {
  */
 void Controller::carAction(const char action, LogFile &logger, Car &currentCar)
 {
-    //TODO: Add rotate right/left.
-    switch (action) {
-        case 'L':
-            UserInterface::printInfo("Car strafe left.");
-            currentCar.applyCommand(MovementCommand::StrafeLeft);
-            logger.logLeft();
-            break;
-        case 'R':
-            UserInterface::printInfo("Car strafe right");
-            currentCar.applyCommand(MovementCommand::StrafeRight);
-            logger.logRight();
-            break;
-        case 'Q':
-            UserInterface::printInfo("Car rotate left.");
-            currentCar.applyCommand(MovementCommand::RotateLeft);
-            logger.logLeft();
-            break;
-        case 'E':
-            UserInterface::printInfo("Car rotate right.");
-            currentCar.applyCommand(MovementCommand::RotateRight);
-            logger.logRight();
-            break;
-        case 'B':
-            UserInterface::printInfo("Moving Car Backward");
-            currentCar.applyCommand(MovementCommand::MoveBackward);
-            logger.logBack();
-            break;
-        case 'F':
-            UserInterface::printInfo("Moving forward");
-            currentCar.applyCommand(MovementCommand::MoveForward);
-            logger.logForward();
-            break;
-        case 'S':
-            UserInterface::printInfo("Car stopped");
-            currentCar.applyCommand(MovementCommand::Stop);
-            logger.logStop();
-            break;
+    // TODO: Add rotate right/left.
+    switch (action)
+    {
+    case 'L':
+        UserInterface::printInfo("Car strafe left.");
+        currentCar.applyCommand(MovementCommand::StrafeLeft);
+        logger.logLeft();
+        break;
+    case 'R':
+        UserInterface::printInfo("Car strafe right");
+        currentCar.applyCommand(MovementCommand::StrafeRight);
+        logger.logRight();
+        break;
+    case 'Q':
+        UserInterface::printInfo("Car rotate left.");
+        currentCar.applyCommand(MovementCommand::RotateLeft);
+        logger.logLeft();
+        break;
+    case 'E':
+        UserInterface::printInfo("Car rotate right.");
+        currentCar.applyCommand(MovementCommand::RotateRight);
+        logger.logRight();
+        break;
+    case 'B':
+        UserInterface::printInfo("Moving Car Backward");
+        currentCar.applyCommand(MovementCommand::MoveBackward);
+        logger.logBack();
+        break;
+    case 'F':
+        UserInterface::printInfo("Moving forward");
+        currentCar.applyCommand(MovementCommand::MoveForward);
+        logger.logForward();
+        break;
+    case 'S':
+        UserInterface::printInfo("Car stopped");
+        currentCar.applyCommand(MovementCommand::Stop);
+        logger.logStop();
+        break;
     case 'P':
-            UserInterface::printInfo("Photo taken.");
-            //TODO: The capture frame needs to be fixed.
-            logger.logCamera("CAPTURE TAKEN.");
-            currentCar.cameraOn();
-            currentCar.cameraOff();
-            break;
+        UserInterface::printInfo("Photo taken.");
+        // TODO: The capture frame needs to be fixed.
+        logger.logCamera("CAPTURE TAKEN.");
+        currentCar.cameraOn();
+        currentCar.cameraOff();
+        break;
     case 'X':
         break;
-        default:
-            std::cout << "\n" << "Invalid action" << "\n";
-            break;
+    default:
+        std::cout << "\n"
+                  << "Invalid action" << "\n";
+        break;
     }
-
 }
-
-

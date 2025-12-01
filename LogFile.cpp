@@ -1,7 +1,3 @@
-//
-// Created by Cobalt Stamey on 11/29/25.
-//
-
 #include "LogFile.h"
 #include <filesystem>
 #include <iostream>
@@ -18,7 +14,7 @@ LogFile::LogFile()
     file.open("logfiles/log.txt");
     file << "---LOG START---\n";
 
-    //printing the absolute path
+    // printing the absolute path
     std::filesystem::path logPath = std::filesystem::absolute("logfiles/log.txt");
     std::cout << "log file saved to: " << logPath << "\n";
 }
@@ -75,5 +71,3 @@ void LogFile::logCamera(const std::string &state)
 {
     file << "CAMERA: " << state << "\n";
 }
-
-
