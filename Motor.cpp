@@ -69,6 +69,7 @@ Direction Motor::getDirection() const {
  * Used to turn on the car's motor.
  */
 void Motor::enable() {
+    //TODO: turn on the motors using the driver.
     enabled = true;
 }
 

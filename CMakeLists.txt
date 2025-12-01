@@ -15,4 +15,6 @@ add_executable(PROJECT2TCES203
         Controller.h
         LogFile.cpp
         LogFile.h
+        PiCamera.cpp
+        PiCamera.h
 )
