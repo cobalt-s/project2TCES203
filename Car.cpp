@@ -71,8 +71,8 @@ Car::Car()
     //  this may have to change I need to look at the car and what pins they
     //  are in.
 
-    frontLeft.initialize(23, 3, 5);  // ENA, IN1, IN2
-    frontRight.initialize(23, 7, 11); // ENB, IN2, IN3
+    frontLeft.initialize(23, 5, 3);  // ENA, IN1, IN2
+    frontRight.initialize(23, 11, 7); // ENB, IN2, IN3
     rearLeft.initialize(23, 13, 15);     // ENC, IN4, IN5
     rearRight.initialize(23, 19, 21);    // END, IN6, IN7
 }
