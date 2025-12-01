@@ -68,10 +68,9 @@ Car::Car()
     // are in. 
 
     frontLeft.initialize(18, 23, 24); // ENA, IN1, IN2
-    frontRight.initialize(13, 27, 22);
-    rearLeft.initialize(12, 5, 6);
-    rearRight.initialize(12, 5, 6);
-    
+    frontRight.initialize(13, 27, 22); // ENB, IN2, IN3
+    rearLeft.initialize(12, 5, 6); // ENC, IN4, IN5
+    rearRight.initialize(12, 5, 6); // END, IN6, IN7
 }
 
 /**
