@@ -31,10 +31,23 @@ private:
     bool enabled;   
     Direction direction;
 
+    // L298N control pins
+    int enablePin; // ena or enb for the PWM
+    int input1Pin; // IN1 or IN3
+    int input2Pin; // IN2 or IN4
+
+    static bool pigpioInitalized;
+    static int instanceCount;
+
+    void updateMotorOutput();
+
 public:
     Motor();
     Motor(const std::string& motorName);
+    Motor(const std::string& motorName, int ena, int in1, int in2);
+    //~Motor();
 
+    bool initalize(int ena, int in1, int in2);
     void setSpeed(int newSpeedPercent);
     void setDirection(Direction newDirection);
     int getSpeed() const;
