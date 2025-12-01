@@ -303,7 +303,9 @@ CarSnapshot Car::getSnapshot() const
 }
 
 /**
- * Method used to have the car perform a given command (moving, strafing, stopping).
+ * Applys a movement given a command and distance/angle.
+ * @param cmd the movement command.
+ * @param value the value distance or angle.
  */
 void Car::applyCommand(MovementCommand cmd, double value)
 {
@@ -329,6 +331,39 @@ void Car::applyCommand(MovementCommand cmd, double value)
         case MovementCommand::Stop:
             stopAllMotors();
             break;
+    }
+}
+
+/**
+ * Applys a movement given just a command.
+ * @param cmd the movement command.
+ */
+void Car::applyCommand(MovementCommand cmd)
+{
+    const double distance = 10; // meters?
+    const double angle = 5;
+    switch (cmd) {
+    case MovementCommand::MoveForward:
+        moveForward(distance);
+        break;
+    case MovementCommand::MoveBackward:
+        moveBackward(distance);
+        break;
+    case MovementCommand::StrafeLeft:
+        strafeLeft(distance);
+        break;
+    case MovementCommand::StrafeRight:
+        strafeRight(distance);
+        break;
+    case MovementCommand::RotateLeft:
+        rotateLeft(angle);
+        break;
+    case MovementCommand::RotateRight:
+        rotateRight(angle);
+        break;
+    case MovementCommand::Stop:
+        stopAllMotors();
+        break;
     }
 }
 

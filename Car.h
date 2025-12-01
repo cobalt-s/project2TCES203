@@ -98,9 +98,19 @@ class Car {
         Motor getRearLeftMotor() const;
         Motor getRearRightMotor() const;
 
-        // New in Activity 14:
-        // Apply a high-level movement command using an enum.
+
+        /**
+         * Applys a movement given a command and distance/angle.
+         * @param cmd the movement command.
+         * @param value the value distance or angle.
+         */
         void applyCommand(MovementCommand cmd, double value);
+
+        /**
+         * Applys a movement given just a command.
+         * @param cmd the movement command.
+         */
+        void applyCommand(MovementCommand cmd);
 
         // New in Activity 14:
         // Return a CarSnapshot that captures the full current state.

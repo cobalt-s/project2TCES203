@@ -5,6 +5,7 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 #include "LogFile.h"
+#include "Car.h"
 class Controller {
     public:
         Controller() = default;
@@ -30,7 +31,6 @@ class Controller {
          */
         static int getUserChoiceInt();
 
-
         /**
          * gets the user choice in CHAR format
          * @return char: the users choice
@@ -41,8 +41,9 @@ class Controller {
          * Moves the car based on a direction.
          * @param direction the direction you want to move the car.
          * @param logger
+         * @param currentCar
          */
-        static void moveCar(const char direction, LogFile &logger);
+        static void moveCar(const char direction, LogFile &logger, Car &currentCar);
 };
 
 #endif //CONTROLLER_H

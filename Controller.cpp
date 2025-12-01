@@ -6,6 +6,7 @@
 #include <iostream>
 #include "LogFile.h"
 #include "UserInterface.h"
+#include "Car.h"
 
 void Controller::run()
 {
@@ -32,6 +33,7 @@ void Controller::run()
 
 void Controller::userControl()
 {
+    Car currentCar;
     LogFile logger;
     UserInterface::printInfo("Entering User Control mode.");
 
@@ -39,7 +41,7 @@ void Controller::userControl()
     do {
         UserInterface::printActionMenu();
         choice = getUserChoiceChar();
-        Controller::moveCar(choice, logger);
+        Controller::moveCar(choice, logger, currentCar);
     } while (choice != 'E');
 
     UserInterface::printInfo("Exiting User Control mode.");
@@ -83,30 +85,35 @@ char Controller::getUserChoiceChar() {
  * This function allows you to move the car in a specific direction.
  * @param direction the direction to move the car.
  * @param logger the log file object.
+ * @param currentCar
  */
-void Controller::moveCar(const char direction, LogFile &logger)
+void Controller::moveCar(const char direction, LogFile &logger, Car &currentCar)
 {
-    //TODO: add log file implementation
-    //TODO: add movement implementation
+    //TODO: Add rotate right/left.
     switch (direction) {
         case 'L':
             std::cout << "\n" << "Moving car left" << "\n";
+            currentCar.applyCommand(MovementCommand::StrafeLeft);
             logger.logLeft();
             break;
         case 'R':
             std::cout << "\n" << "Moving car right" << "\n";
+            currentCar.applyCommand(MovementCommand::StrafeRight);
             logger.logRight();
             break;
         case 'B':
             std::cout << "\n" << "Moving car backwards" << "\n";
+            currentCar.applyCommand(MovementCommand::MoveForward);
             logger.logBack();
             break;
         case 'F':
             std::cout << "\n" << "Moving car forwards" << "\n";
+            currentCar.applyCommand(MovementCommand::MoveForward);
             logger.logForward();
             break;
         case 'S':
             std::cout << "\n" << "Moving car stop" << "\n";
+            currentCar.applyCommand(MovementCommand::Stop);
             logger.logStop();
             break;
         default:
