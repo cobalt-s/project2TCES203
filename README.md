@@ -47,14 +47,14 @@ To get pigpio installed
 Then to compile do: 
 - example code very cool. 
 
-g++ -std=c++17 -Wall -Wextra \
+```g++ -std=c++17 -Wall -Wextra \
 main.cpp \
 Car.cpp \
 Motor.cpp \
 Controller.cpp \
 UserInterface.cpp \
 LogFile.cpp \
--o car_project
+-o car_project```
 
 then do 
 ./car_project
