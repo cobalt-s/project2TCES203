@@ -14,6 +14,7 @@
  * Header file for a motor of an RC car
  * 
  * Jonathan Lee
+ * Cobalt Stamey
  * TCES 203 A
  * Project 2
  */
