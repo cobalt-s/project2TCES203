@@ -38,12 +38,12 @@ class Controller {
         static char getUserChoiceChar();
 
         /**
-         * Moves the car based on a direction.
-         * @param direction the direction you want to move the car.
+         * Moves the car based on a action.
+         * @param action the direction you want to move the car.
          * @param logger
          * @param currentCar
          */
-        static void moveCar(const char direction, LogFile &logger, Car &currentCar);
+        static void carAction(const char action, LogFile &logger, Car &currentCar);
 };
 
 #endif //CONTROLLER_H

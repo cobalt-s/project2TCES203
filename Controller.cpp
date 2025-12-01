@@ -44,7 +44,7 @@ void Controller::userControl()
     do {
         UserInterface::printActionMenu();
         choice = getUserChoiceChar();
-        Controller::moveCar(choice, logger, currentCar);
+        Controller::carAction(choice, logger, currentCar);
     } while (choice != 'E');
 
     UserInterface::printInfo("Exiting User Control mode.");
@@ -115,15 +115,15 @@ char Controller::getUserChoiceChar() {
 }
 
 /**
- * This function allows you to move the car in a specific direction.
- * @param direction the direction to move the car.
+ * This function allows you to move the car in a specific action.
+ * @param action the action you want the car to do.
  * @param logger the log file object.
  * @param currentCar the object of the car that is being moved.
  */
-void Controller::moveCar(const char direction, LogFile &logger, Car &currentCar)
+void Controller::carAction(const char action, LogFile &logger, Car &currentCar)
 {
     //TODO: Add rotate right/left.
-    switch (direction) {
+    switch (action) {
         case 'L':
             UserInterface::printInfo("Car strafe left.");
             currentCar.applyCommand(MovementCommand::StrafeLeft);
