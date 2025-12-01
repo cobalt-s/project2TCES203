@@ -6,15 +6,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(PROJECT2TCES203
     main.cpp
-    #Car.cpp
-    #Motor.cpp
-    Simulator.cpp
+    Car.cpp
+    Motor.cpp
+    #Simulator.cpp
         UserInterface.cpp
         UserInterface.h
         Controller.cpp
         Controller.h
         LogFile.cpp
         LogFile.h
-        PiCamera.cpp
-        PiCamera.h
+        #PiCamera.cpp
+        #PiCamera.h
 )
