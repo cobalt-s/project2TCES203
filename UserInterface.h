@@ -9,9 +9,11 @@
 namespace UserInterface {
     void printMainMenu();
     void printActionMenu();
+    void printExampleMenu();
 
     void printError(const std::string& message);
     void printInfo(const std::string& message);
+
 
 }
 
