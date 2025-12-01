@@ -4,6 +4,7 @@
 
 #include "LogFile.h"
 #include <filesystem>
+#include <iostream>
 
 /**
  * Creates the logfile dir if none is made, starts the
@@ -15,6 +16,10 @@ LogFile::LogFile()
 
     file.open("logfiles/log.txt");
     file << "LOG START:\n";
+
+    //printing the absolute path
+    std::filesystem::path logPath = std::filesystem::absolute("logfiles/log.txt");
+    std::cout << "log file saved to: " << logPath << std::endl;
 }
 
 /**
