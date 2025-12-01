@@ -20,7 +20,7 @@ class Camera {
     public:
         void startStreaming();
         void stopStreaming();
-        void captureFrame();
+        void captureFrame(double captureX, double captureY);
         bool isStreaming() const;
 };
 

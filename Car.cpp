@@ -1,6 +1,8 @@
 #include "Car.h"
-#include <algorithm>   // std::clamp (C++17; if not available, replace with manual clamp)
-#include <cmath>       // std::fmod
+#include <algorithm>   
+#include <cmath>       
+#include <string>
+#include <iostream>
 
 /**
  * Main code file used to represent a four-wheeled RC Car
@@ -11,7 +13,7 @@
  */
 
  /**
-  * Represents a Pi Camera for the car.
+  * Represents a camera for the car.
   */
 Camera::Camera()
     : streaming(false)
@@ -32,6 +34,10 @@ void Camera::startStreaming()
 void Camera::stopStreaming()
 {
     streaming = false;
+}
+
+void Camera::captureFrame(double captureX, double captureY) {
+    std::cout << "Hello" << "\n";
 }
 
 /**
