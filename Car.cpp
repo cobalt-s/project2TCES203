@@ -38,6 +38,7 @@ void Camera::stopStreaming()
 
 void Camera::captureFrame(double captureX, double captureY) {
     std::cout << "Hello" << "\n";
+    //TODO: Implement captureX, capture Y in Log File and terminal.
 }
 
 /**
