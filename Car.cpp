@@ -66,7 +66,7 @@ Car::Car()
       y(0.0),
       headingDeg(0.0)
 {
-    // initalizing motors with the gpio pins for the l298n motor drivers.
+    // initializing motors with the gpio pins for the l298n motor drivers.
     //  we probably will need to adjust this based on which car we get.
     //  this may have to change I need to look at the car and what pins they
     //  are in.
@@ -289,7 +289,8 @@ double Car::getY() const
 }
 
 /**
- * Return the car's heading degree.
+ * Get method.
+ * @return the cars heading degree.
  */
 double Car::getHeadingDeg() const
 {
