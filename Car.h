@@ -18,6 +18,7 @@ class Camera {
     private:
         bool streaming;
     public:
+        Camera();
         void startStreaming();
         void stopStreaming();
         void captureFrame(double captureX, double captureY);
