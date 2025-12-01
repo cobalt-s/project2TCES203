@@ -4,10 +4,10 @@
 #include <string>
 
 // pigpio is only for linux, so I put this here so it uses our like test library so the code still compiles on windows.
-#ifdef _WIN32
-    #include "pigpio_mock.h"
-#else
+#ifdef __linux__
     #include <pigpio.h>
+#else
+    #include "pigpio_mock.h"
 #endif
 
 /**
