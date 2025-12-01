@@ -12,12 +12,12 @@ class Controller {
         /**
          * Main run for the controller.
          */
-        void run();
+        static void run();
     private:
         /**
          * User control for the car.
          */
-        void userControl();
+        static void userControl();
 
         /**
          * File control for the car.
@@ -42,7 +42,7 @@ class Controller {
          * @param direction the direction you want to move the car.
          * @param logger
          */
-        void moveCar(const char direction, LogFile &logger);
+        static void moveCar(const char direction, LogFile &logger);
 };
 
 #endif //CONTROLLER_H
