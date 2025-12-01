@@ -45,7 +45,7 @@ void Controller::userControl()
         UserInterface::printActionMenu();
         choice = getUserChoiceChar();
         Controller::carAction(choice, logger, currentCar);
-    } while (choice != 'E');
+    } while (choice != 'X');
 
     UserInterface::printInfo("Exiting User Control mode.");
 }
@@ -134,6 +134,14 @@ void Controller::carAction(const char action, LogFile &logger, Car &currentCar)
             currentCar.applyCommand(MovementCommand::StrafeRight);
             logger.logRight();
             break;
+        case 'Q':
+            UserInterface::printInfo("Car rotate left.");
+            currentCar.applyCommand(MovementCommand::RotateLeft);
+            logger.logLeft();
+        case 'E':
+            UserInterface::printInfo("Car rotate right.");
+            currentCar.applyCommand(MovementCommand::RotateRight);
+            logger.logRight();
         case 'B':
             UserInterface::printInfo("Moving Car Backward");
             currentCar.applyCommand(MovementCommand::MoveBackward);
@@ -156,7 +164,7 @@ void Controller::carAction(const char action, LogFile &logger, Car &currentCar)
             currentCar.cameraOn();
             currentCar.cameraOff();
             break;
-    case 'E':
+    case 'X':
         break;
         default:
             std::cout << "\n" << "Invalid action" << "\n";
