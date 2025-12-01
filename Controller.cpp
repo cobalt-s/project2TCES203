@@ -4,6 +4,7 @@
 
 #include "Controller.h"
 #include <iostream>
+#include "LogFile.h"
 #include "UserInterface.h"
 
 void Controller::run()
@@ -31,12 +32,14 @@ void Controller::run()
 
 void Controller::userControl()
 {
+    LogFile logger;
     UserInterface::printInfo("Entering User Control mode.");
+
     char choice;
     do {
         UserInterface::printActionMenu();
         choice = getUserChoiceChar();
-        Controller::moveCar(choice);
+        Controller::moveCar(choice, logger);
     } while (choice != 'E');
 
     UserInterface::printInfo("Exiting User Control mode.");
@@ -79,26 +82,32 @@ char Controller::getUserChoiceChar() {
 /**
  * This function allows you to move the car in a specific direction.
  * @param direction the direction to move the car.
+ * @param logger the log file object.
  */
-void Controller::moveCar(const char direction)
+void Controller::moveCar(const char direction, LogFile &logger)
 {
     //TODO: add log file implementation
     //TODO: add movement implementation
     switch (direction) {
         case 'L':
             std::cout << "\n" << "Moving car left" << "\n";
+            logger.logLeft();
             break;
         case 'R':
             std::cout << "\n" << "Moving car right" << "\n";
+            logger.logRight();
             break;
         case 'B':
             std::cout << "\n" << "Moving car backwards" << "\n";
+            logger.logBack();
             break;
         case 'F':
             std::cout << "\n" << "Moving car forwards" << "\n";
+            logger.logForward();
             break;
         case 'S':
             std::cout << "\n" << "Moving car stop" << "\n";
+            logger.logStop();
             break;
         default:
             std::cout << "\n" << "Invalid action" << "\n";

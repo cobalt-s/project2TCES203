@@ -4,7 +4,7 @@
 
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
-
+#include "LogFile.h"
 class Controller {
     public:
         Controller() = default;
@@ -40,8 +40,9 @@ class Controller {
         /**
          * Moves the car based on a direction.
          * @param direction the direction you want to move the car.
+         * @param logger
          */
-        void moveCar(char direction);
+        void moveCar(const char direction, LogFile &logger);
 };
 
 #endif //CONTROLLER_H
