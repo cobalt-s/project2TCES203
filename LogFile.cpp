@@ -32,44 +32,39 @@ LogFile::~LogFile()
     file.close();
 }
 
-/**
- * Logs left
- */
 void LogFile::logLeft()
 {
-    file << "LEFT\n";
+    file << "Left\n";
 }
 
-/**
- * Logs right
- */
 void LogFile::logRight()
 {
-    file << "RIGHT\n";
+    file << "Right\n";
 }
 
-/**
- * Logs back
- */
+void LogFile::logRotateLeft()
+{
+    file << "Rotate left\n";
+}
+
+void LogFile::logRotateRight()
+{
+    file << "Rotate right\n";
+}
+
 void LogFile::logBack()
 {
-    file << "BACKWARD\n";
+    file << "Backward\n";
 }
 
-/**
- * Logs forward.
- */
 void LogFile::logForward()
 {
-    file << "FORWARD\n";
+    file << "Forward\n";
 }
 
-/**
- * Logs stop.
- */
 void LogFile::logStop()
 {
-    file << "STOP\n";
+    file << "Stop\n";
 }
 
 /**

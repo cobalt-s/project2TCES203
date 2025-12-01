@@ -14,6 +14,8 @@ class LogFile {
 
         void logLeft();
         void logRight();
+        void logRotateLeft();
+        void logRotateRight();
         void logBack();
         void logForward();
         void logStop();
