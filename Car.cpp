@@ -62,6 +62,16 @@ Car::Car()
       y(0.0),
       headingDeg(0.0)
 {
+    //initalizing motors with the gpio pins for the l298n motor drivers. 
+    // we probably will need to adjust this based on which car we get. 
+    // this may have to change I need to look at the car and what pins they
+    // are in. 
+
+    frontLeft.initialize(18, 23, 24); // ENA, IN1, IN2
+    frontRight.initialize(13, 27, 22);
+    rearLeft.initialize(12, 5, 6);
+    rearRight.initialize(12, 5, 6);
+    
 }
 
 /**
@@ -88,11 +98,16 @@ void Car::moveForward(double distance)
     // Forward increases y
     updatePose(0.0, distance, 0.0);
 
-    // Simple symmetric speeds (illustrative)
+    frontLeft.setDirection(Direction::Forward);
+    frontRight.setDirection(Direction::Forward);
+    rearLeft.setDirection(Direction::Forward);
+    rearRight.setDirection(Direction::Forward);
+
     frontLeft.setSpeed(50);
     frontRight.setSpeed(50);
     rearLeft.setSpeed(50);
     rearRight.setSpeed(50);
+
     frontLeft.enable();
     frontRight.enable();
     rearLeft.enable();
@@ -106,10 +121,16 @@ void Car::moveBackward(double distance)
 {
     updatePose(0.0, -distance, 0.0);
 
+    frontLeft.setDirection(Direction::Backward);
+    frontRight.setDirection(Direction::Backward);
+    rearLeft.setDirection(Direction::Backward);
+    rearRight.setDirection(Direction::Backward);
+
     frontLeft.setSpeed(-50);
     frontRight.setSpeed(-50);
     rearLeft.setSpeed(-50);
     rearRight.setSpeed(-50);
+
     frontLeft.enable();
     frontRight.enable();
     rearLeft.enable();
@@ -123,11 +144,18 @@ void Car::strafeLeft(double distance)
 {
     updatePose(-distance, 0.0, 0.0);
 
+    frontLeft.setDirection(Direction::Backward);
+    frontRight.setDirection(Direction::Forward);
+    rearLeft.setDirection(Direction::Forward);
+    rearRight.setDirection(Direction::Backward);
+
     // Simple pattern for strafing (not physically accurate, but okay for our GUI)
+    // may need to change this for the actual robot. 
     frontLeft.setSpeed(-50);
     rearLeft.setSpeed(50);
     frontRight.setSpeed(50);
     rearRight.setSpeed(-50);
+
     frontLeft.enable();
     frontRight.enable();
     rearLeft.enable();
@@ -141,10 +169,16 @@ void Car::strafeRight(double distance)
 {
     updatePose(distance, 0.0, 0.0);
 
+    frontLeft.setDirection(Direction::Forward);
+    frontRight.setDirection(Direction::Backward);
+    rearLeft.setDirection(Direction::Backward);
+    rearRight.setDirection(Direction::Forward);
+
     frontLeft.setSpeed(50);
     rearLeft.setSpeed(-50);
     frontRight.setSpeed(-50);
     rearRight.setSpeed(50);
+
     frontLeft.enable();
     frontRight.enable();
     rearLeft.enable();
@@ -158,10 +192,16 @@ void Car::rotateLeft(double angleDeg)
 {
     updatePose(0.0, 0.0, angleDeg);
 
+    frontLeft.setDirection(Direction::Backward);
+    frontRight.setDirection(Direction::Backward);
+    rearLeft.setDirection(Direction::Forward);
+    rearRight.setDirection(Direction::Forward);
+
     frontLeft.setSpeed(-40);
     rearLeft.setSpeed(-40);
     frontRight.setSpeed(40);
     rearRight.setSpeed(40);
+
     frontLeft.enable();
     frontRight.enable();
     rearLeft.enable();
@@ -175,10 +215,16 @@ void Car::rotateRight(double angleDeg)
 {
     updatePose(0.0, 0.0, -angleDeg);
 
+    frontLeft.setDirection(Direction::Forward);
+    frontRight.setDirection(Direction::Forward);
+    rearLeft.setDirection(Direction::Backward);
+    rearRight.setDirection(Direction::Backward);
+
     frontLeft.setSpeed(40);
     rearLeft.setSpeed(40);
     frontRight.setSpeed(-40);
     rearRight.setSpeed(-40);
+
     frontLeft.enable();
     frontRight.enable();
     rearLeft.enable();
@@ -190,6 +236,11 @@ void Car::rotateRight(double angleDeg)
  */
 void Car::stopAllMotors()
 {
+    frontLeft.setDirection(Direction::Stop);
+    frontRight.setDirection(Direction::Stop);
+    rearLeft.setDirection(Direction::Stop);
+    rearRight.setDirection(Direction::Stop);
+
     frontLeft.setSpeed(0);
     frontRight.setSpeed(0);
     rearLeft.setSpeed(0);
