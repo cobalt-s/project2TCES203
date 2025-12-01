@@ -1,7 +1,12 @@
 # project2TCES203
 
+Steps to get working: 
 
-program should compile with: 
-g++ -std=c++14 *.cpp -o CarSimulator
+Install pigpio on Rasberry Pi: 
+
+sudo apt-get update
+sudo apt-get install pigpio pigpio-dev
+
+
 
 
