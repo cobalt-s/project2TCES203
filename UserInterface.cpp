@@ -22,6 +22,7 @@ namespace UserInterface {
         std::cout << "(B) Backward" << "\n";
         std::cout << "(F) Forward" << "\n";
         std::cout << "(S) Stop" << "\n";
+        std::cout << "(P) Take Picture" << '\n';
         std::cout << "(E) Exit to main menu" << "\n";
     }
 
@@ -36,12 +37,12 @@ namespace UserInterface {
 
     void printError(const std::string& message)
     {
-        std::cout << "ERROR: " << message << "\n";
+        std::cout << "\n[ERROR] " << message << "\n";
     }
 
     void printInfo(const std::string& message)
     {
-        std::cout << "INFO: " << message << "\n";
+        std::cout << "\n[INFO] " << message << "\n";
     }
 
 }

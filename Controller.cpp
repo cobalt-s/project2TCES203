@@ -22,6 +22,8 @@ void Controller::run()
             case 2:
                 fileControl();
                 break;
+            case 3:
+                break;
             default:
                 UserInterface::printError("Invalid Choice");
                 break;
@@ -50,7 +52,33 @@ void Controller::userControl()
 void Controller::fileControl()
 {
     UserInterface::printInfo("Entering File Control mode.");
-    //readfile function
+    int choice;
+    do
+    {
+        UserInterface::printExampleMenu();
+        choice = getUserChoiceInt();
+        switch (choice)
+        {
+            case 1:
+            UserInterface::printInfo("Entering Example one");
+            //TODO: enter example one.
+            break;
+            case 2:
+            UserInterface::printInfo("Entering Example two");
+            //TODO: enter example two.
+            break;
+            case 3:
+            UserInterface::printInfo("Entering Example three");
+            //TODO: enter example three.
+            break;
+        case 4:
+            break;
+        default:
+            UserInterface::printError("Invalid Choice");
+        }
+    }
+    while (choice != 4);
+    UserInterface::printInfo("Exiting File Control mode.");
 }
 
 int Controller::getUserChoiceInt() {
@@ -67,6 +95,10 @@ int Controller::getUserChoiceInt() {
     return choice;
 }
 
+/**
+ *  Gets the users choice.
+ * @return the users choice as a char
+ */
 char Controller::getUserChoiceChar() {
     std::cout << "Enter your choice(CHAR): ";
     char choice;
@@ -85,7 +117,7 @@ char Controller::getUserChoiceChar() {
  * This function allows you to move the car in a specific direction.
  * @param direction the direction to move the car.
  * @param logger the log file object.
- * @param currentCar
+ * @param currentCar the object of the car that is being moved.
  */
 void Controller::moveCar(const char direction, LogFile &logger, Car &currentCar)
 {
@@ -116,6 +148,11 @@ void Controller::moveCar(const char direction, LogFile &logger, Car &currentCar)
             currentCar.applyCommand(MovementCommand::Stop);
             logger.logStop();
             break;
+    case 'P':
+            std::cout << "\n" << "Photo taken" << "\n";
+            //TODO: The capture frame needs to be fixed.
+            currentCar.cameraOn();
+            currentCar.cameraOff();
         default:
             std::cout << "\n" << "Invalid action" << "\n";
             break;
