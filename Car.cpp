@@ -4,8 +4,8 @@
 #include <string>
 #include <iostream>
 
-#define DISTANCE = 15;
-#define ANGLE = 5;
+#define DISTANCE 15
+#define ANGLE 5
 
 /**
  * Main code file used to represent a four-wheeled RC Car
