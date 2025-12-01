@@ -4,6 +4,7 @@
 
 #include "Controller.h"
 #include <iostream>
+
 #include "LogFile.h"
 #include "UserInterface.h"
 #include "Car.h"
@@ -124,36 +125,38 @@ void Controller::moveCar(const char direction, LogFile &logger, Car &currentCar)
     //TODO: Add rotate right/left.
     switch (direction) {
         case 'L':
-            std::cout << "\n" << "Moving car left" << "\n";
+            UserInterface::printInfo("Car strafe left.");
             currentCar.applyCommand(MovementCommand::StrafeLeft);
             logger.logLeft();
             break;
         case 'R':
-            std::cout << "\n" << "Moving car right" << "\n";
+            UserInterface::printInfo("Car strafe right");
             currentCar.applyCommand(MovementCommand::StrafeRight);
             logger.logRight();
             break;
         case 'B':
-            std::cout << "\n" << "Moving car backwards" << "\n";
-            currentCar.applyCommand(MovementCommand::MoveForward);
+            UserInterface::printInfo("Moving Car Backward");
+            currentCar.applyCommand(MovementCommand::MoveBackward);
             logger.logBack();
             break;
         case 'F':
-            std::cout << "\n" << "Moving car forwards" << "\n";
+            UserInterface::printInfo("Moving forward");
             currentCar.applyCommand(MovementCommand::MoveForward);
             logger.logForward();
             break;
         case 'S':
-            std::cout << "\n" << "Moving car stop" << "\n";
+            UserInterface::printInfo("Car stopped");
             currentCar.applyCommand(MovementCommand::Stop);
             logger.logStop();
             break;
     case 'P':
-            std::cout << "\n" << "Photo taken" << "\n";
+            UserInterface::printInfo("Photo taken.");
             //TODO: The capture frame needs to be fixed.
             logger.logCamera("CAPTURE TAKEN.");
             currentCar.cameraOn();
             currentCar.cameraOff();
+    case 'E':
+        break;
         default:
             std::cout << "\n" << "Invalid action" << "\n";
             break;
