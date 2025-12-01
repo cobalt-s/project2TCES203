@@ -138,10 +138,12 @@ void Controller::carAction(const char action, LogFile &logger, Car &currentCar)
             UserInterface::printInfo("Car rotate left.");
             currentCar.applyCommand(MovementCommand::RotateLeft);
             logger.logLeft();
+            break;
         case 'E':
             UserInterface::printInfo("Car rotate right.");
             currentCar.applyCommand(MovementCommand::RotateRight);
             logger.logRight();
+            break;
         case 'B':
             UserInterface::printInfo("Moving Car Backward");
             currentCar.applyCommand(MovementCommand::MoveBackward);

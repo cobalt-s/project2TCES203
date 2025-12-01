@@ -11,22 +11,25 @@
 namespace UserInterface {
     void printMainMenu()
     {
-        std::cout << "\n--CAR CONTROLLER--" << "\n";
-        std::cout << "Which mode would you like to enter?" << "\n";
+        std::cout << "\n=====CAR CONTROLLER=====" << "\n";
+        std::cout << "Which mode would you like \nto enter?" << "\n";
         std::cout << "(1) Control with computer" << "\n";
         std::cout << "(2) Test with examples" << "\n";
         std::cout << "(3) Exit program." << "\n";
+        std::cout << "========================" << "\n";
     }
     void printActionMenu()
     {
         std::cout << "\n" << std::string(20, '=')  << "ACTION MENU" << std::string(20, '=') << std::endl;
         std::cout << "(L) Left" << "\n";
         std::cout << "(R) Right" << "\n";
+        std::cout << "(Q) Rotate Left" << "\n";
+        std::cout << "(E) Rotate Right" << "\n";
         std::cout << "(B) Backward" << "\n";
         std::cout << "(F) Forward" << "\n";
         std::cout << "(S) Stop" << "\n";
         std::cout << "(P) Take Picture" << '\n';
-        std::cout << "(E) Exit to main menu" << "\n";
+        std::cout << "(X) Exit to main menu" << "\n";
         std::cout << std::string(51, '=') << std::endl;
 
     }
