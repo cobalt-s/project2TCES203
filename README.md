@@ -22,10 +22,7 @@ This is the loggin capability, it allows you to log to a file which can save all
 program.
 
 ### Motor.cpp & Motor.h
-This is the Motor Class it functions as a way to setup all the motors on the pi and a way to move them. 
-
-### PiCamera.cpp & PiCamera.h
-This is code to use the cameras on the pi. 
+This is the Motor Class it functions as a way to setup all the motors on the pi and a way to move them.
 
 ### pigpio_mock.h
 
