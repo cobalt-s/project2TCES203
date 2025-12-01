@@ -1,6 +1,14 @@
 #ifndef MOTOR_H
 #define MOTOR_H
+
 #include <string>
+
+// pigpio is only for linux so I put this here so it uses our like test library so the code still compiles on windows. 
+#ifdef _WIN32
+    #include "pigpio_mock.h"
+#else
+    #include <pigpio.h>
+#endif
 
 /**
  * Header file for a motor of an RC car
@@ -36,7 +44,7 @@ private:
     int input1Pin; // IN1 or IN3
     int input2Pin; // IN2 or IN4
 
-    static bool pigpioInitalized;
+    static bool pigpioInitialized;
     static int instanceCount;
 
     void updateMotorOutput();
@@ -45,9 +53,9 @@ public:
     Motor();
     Motor(const std::string& motorName);
     Motor(const std::string& motorName, int ena, int in1, int in2);
-    //~Motor();
+    ~Motor();
 
-    bool initalize(int ena, int in1, int in2);
+    bool initialize(int ena, int in1, int in2);
     void setSpeed(int newSpeedPercent);
     void setDirection(Direction newDirection);
     int getSpeed() const;
