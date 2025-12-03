@@ -45,10 +45,10 @@ struct MotorSnapshot {
 
 // Structure to capture the full state of the car at one instant.
 struct CarSnapshot {
-    double x;
-    double y;
-    double headingDeg;
-    bool cameraStreaming;
+    double x{};
+    double y{};
+    double headingDeg{};
+    bool cameraStreaming{};
 
     MotorSnapshot frontLeft;
     MotorSnapshot frontRight;
@@ -93,10 +93,10 @@ class Car {
         double getY() const;
         double getHeadingDeg() const;
 
-        Motor getFrontLeftMotor() const;
-        Motor getFrontRightMotor() const;
-        Motor getRearLeftMotor() const;
-        Motor getRearRightMotor() const;
+        const Motor& getFrontLeftMotor() const;
+        const Motor& getFrontRightMotor() const;
+        const Motor& getRearLeftMotor() const;
+        const Motor& getRearRightMotor() const;
 
 
         /**

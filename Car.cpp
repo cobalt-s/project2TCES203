@@ -1,5 +1,4 @@
 #include "Car.h"
-#include <algorithm>
 #include <cmath>
 #include <iostream>
 #include <string>
@@ -53,28 +52,28 @@ bool Camera::isStreaming() const
     return streaming;
 }
 
-/**
- * Constructor for a four-wheeled RC car
- */
+constexpr int IN1 = 26;
+constexpr int IN2 = 19;
+
+constexpr int IN3 = 27;
+constexpr int IN4 = 17;
+
+constexpr int IN5 = 24;
+constexpr int IN6 = 23;
+
+constexpr int IN7 = 21;
+constexpr int IN8 = 20;
+
 Car::Car()
-    : frontLeft("front-left"),
-      frontRight("front-right"),
-      rearLeft("rear-left"),
-      rearRight("rear-right"),
-      camera(),
+    : frontLeft("front-left", IN1, IN2),
+      frontRight("front-right", IN3, IN4),
+      rearLeft("rear-left", IN5, IN6),
+      rearRight("rear-right", IN7, IN8),
       x(0.0),
       y(0.0),
-      headingDeg(0.0)
+      headingDeg(0.0),
+      camera()
 {
-    // initializing motors with the gpio pins for the l298n motor drivers.
-    //  we probably will need to adjust this based on which car we get.
-    //  this may have to change I need to look at the car and what pins they
-    //  are in.
-
-    frontLeft.initialize(12, 2, 3);  // ENA, IN1, IN2
-    frontRight.initialize(12, 17, 27); // ENB, IN2, IN3
-    rearLeft.initialize(13, 22, 15);     // ENC, IN4, IN5
-    rearRight.initialize(13, 10, 9);    // END, IN6, IN7
 }
 
 /**
@@ -104,13 +103,9 @@ void Car::moveForward(const double distance)
 
     frontLeft.setDirection(Direction::Forward);
     frontRight.setDirection(Direction::Forward);
+
     rearLeft.setDirection(Direction::Forward);
     rearRight.setDirection(Direction::Forward);
-
-    frontLeft.setSpeed(50);
-    frontRight.setSpeed(50);
-    rearLeft.setSpeed(50);
-    rearRight.setSpeed(50);
 
     frontLeft.enable();
     frontRight.enable();
@@ -127,13 +122,9 @@ void Car::moveBackward(const double distance)
 
     frontLeft.setDirection(Direction::Backward);
     frontRight.setDirection(Direction::Backward);
+
     rearLeft.setDirection(Direction::Backward);
     rearRight.setDirection(Direction::Backward);
-
-    frontLeft.setSpeed(-50);
-    frontRight.setSpeed(-50);
-    rearLeft.setSpeed(-50);
-    rearRight.setSpeed(-50);
 
     frontLeft.enable();
     frontRight.enable();
@@ -150,15 +141,9 @@ void Car::strafeLeft(const double distance)
 
     frontLeft.setDirection(Direction::Backward);
     frontRight.setDirection(Direction::Forward);
+
     rearLeft.setDirection(Direction::Forward);
     rearRight.setDirection(Direction::Backward);
-
-    // Simple pattern for strafing (not physically accurate, but okay for our GUI)
-    // may need to change this for the actual robot.
-    frontLeft.setSpeed(-50);
-    rearLeft.setSpeed(50);
-    frontRight.setSpeed(50);
-    rearRight.setSpeed(-50);
 
     frontLeft.enable();
     frontRight.enable();
@@ -175,13 +160,9 @@ void Car::strafeRight(const double distance)
 
     frontLeft.setDirection(Direction::Forward);
     frontRight.setDirection(Direction::Backward);
+
     rearLeft.setDirection(Direction::Backward);
     rearRight.setDirection(Direction::Forward);
-
-    frontLeft.setSpeed(50);
-    rearLeft.setSpeed(-50);
-    frontRight.setSpeed(-50);
-    rearRight.setSpeed(50);
 
     frontLeft.enable();
     frontRight.enable();
@@ -197,14 +178,10 @@ void Car::rotateLeft(const double angleDeg)
     updatePose(0.0, 0.0, angleDeg);
 
     frontLeft.setDirection(Direction::Backward);
-    frontRight.setDirection(Direction::Backward);
-    rearLeft.setDirection(Direction::Forward);
-    rearRight.setDirection(Direction::Forward);
+    frontRight.setDirection(Direction::Forward);
 
-    frontLeft.setSpeed(-40);
-    rearLeft.setSpeed(-40);
-    frontRight.setSpeed(40);
-    rearRight.setSpeed(40);
+    rearLeft.setDirection(Direction::Backward);
+    rearRight.setDirection(Direction::Forward);
 
     frontLeft.enable();
     frontRight.enable();
@@ -220,14 +197,10 @@ void Car::rotateRight(const double angleDeg)
     updatePose(0.0, 0.0, -angleDeg);
 
     frontLeft.setDirection(Direction::Forward);
-    frontRight.setDirection(Direction::Forward);
-    rearLeft.setDirection(Direction::Backward);
-    rearRight.setDirection(Direction::Backward);
+    frontRight.setDirection(Direction::Backward);
 
-    frontLeft.setSpeed(40);
-    rearLeft.setSpeed(40);
-    frontRight.setSpeed(-40);
-    rearRight.setSpeed(-40);
+    rearLeft.setDirection(Direction::Forward);
+    rearRight.setDirection(Direction::Backward);
 
     frontLeft.enable();
     frontRight.enable();
@@ -244,11 +217,6 @@ void Car::stopAllMotors()
     frontRight.setDirection(Direction::Stop);
     rearLeft.setDirection(Direction::Stop);
     rearRight.setDirection(Direction::Stop);
-
-    frontLeft.setSpeed(0);
-    frontRight.setSpeed(0);
-    rearLeft.setSpeed(0);
-    rearRight.setSpeed(0);
 
     frontLeft.disable();
     frontRight.disable();
@@ -300,14 +268,14 @@ double Car::getHeadingDeg() const
 /**
  * Return the car's front left motor.
  */
-Motor Car::getFrontLeftMotor() const
+const Motor& Car::getFrontLeftMotor() const
 {
     return frontLeft;
 }
 /**
  * Return the car's front right motor.
  */
-Motor Car::getFrontRightMotor() const
+const Motor& Car::getFrontRightMotor() const
 {
     return frontRight;
 }
@@ -315,7 +283,7 @@ Motor Car::getFrontRightMotor() const
 /**
  * Return the car's rear left motor.
  */
-Motor Car::getRearLeftMotor() const
+const Motor& Car::getRearLeftMotor() const
 {
     return rearLeft;
 }
@@ -323,7 +291,7 @@ Motor Car::getRearLeftMotor() const
 /**
  * Return the car's rear right motor.
  */
-Motor Car::getRearRightMotor() const
+const Motor& Car::getRearRightMotor() const
 {
     return rearRight;
 }
@@ -341,19 +309,15 @@ CarSnapshot Car::getSnapshot() const
     snap.cameraStreaming = camera.isStreaming();
 
     snap.frontLeft.name = frontLeft.getName();
-    snap.frontLeft.speedPercent = frontLeft.getSpeed();
     snap.frontLeft.enabled = frontLeft.isEnabled();
 
     snap.frontRight.name = frontRight.getName();
-    snap.frontRight.speedPercent = frontRight.getSpeed();
     snap.frontRight.enabled = frontRight.isEnabled();
 
     snap.rearLeft.name = rearLeft.getName();
-    snap.rearLeft.speedPercent = rearLeft.getSpeed();
     snap.rearLeft.enabled = rearLeft.isEnabled();
 
     snap.rearRight.name = rearRight.getName();
-    snap.rearRight.speedPercent = rearRight.getSpeed();
     snap.rearRight.enabled = rearRight.isEnabled();
 
     return snap;
