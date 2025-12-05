@@ -14,23 +14,29 @@
  * Project 2
  */
 
-void Controller::userControl()
+/**
+ *  Gets the users choice.
+ * @return the users choice as a char
+ */
+char Controller::getUserChoiceChar()
 {
-    Car currentCar;
-    LogFile logger;
-    UserInterface::printInfo("Entering User Control mode.");
-
+    std::cout << "Enter your choice(CHAR): ";
     char choice;
-    do
-    {
-        UserInterface::printActionMenu();
-        choice = getUserChoiceChar();
-        Controller::carAction(choice, logger, currentCar);
-    } while (choice != 'X');
 
-    UserInterface::printInfo("Exiting User Control mode.");
+    if (!(std::cin >> choice))
+    {
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        UserInterface::printError("Please enter a valid number.");
+        return -1;
+    }
+
+    return choice;
 }
 
+/**
+ * 
+ */
 void Controller::fileControl()
 {
     UserInterface::printInfo("Entering File Control mode.");
@@ -62,30 +68,13 @@ void Controller::fileControl()
     UserInterface::printInfo("Exiting File Control mode.");
 }
 
+/**
+ * 
+ */
 int Controller::getUserChoiceInt()
 {
     std::cout << "Enter your choice (INT): ";
     int choice;
-
-    if (!(std::cin >> choice))
-    {
-        std::cin.clear();
-        std::cin.ignore(10000, '\n');
-        UserInterface::printError("Please enter a valid number.");
-        return -1;
-    }
-
-    return choice;
-}
-
-/**
- *  Gets the users choice.
- * @return the users choice as a char
- */
-char Controller::getUserChoiceChar()
-{
-    std::cout << "Enter your choice(CHAR): ";
-    char choice;
 
     if (!(std::cin >> choice))
     {
@@ -160,6 +149,29 @@ void Controller::carAction(const char action, LogFile &logger, Car &currentCar)
     }
 }
 
+/**
+ * 
+ */
+void Controller::userControl()
+{
+    Car currentCar;
+    LogFile logger;
+    UserInterface::printInfo("Entering User Control mode.");
+
+    char choice;
+    do
+    {
+        UserInterface::printActionMenu();
+        choice = getUserChoiceChar();
+        Controller::carAction(choice, logger, currentCar);
+    } while (choice != 'X');
+
+    UserInterface::printInfo("Exiting User Control mode.");
+}
+
+/**
+ * 
+ */
 void Controller::run()
 {
     int choice = 0;
@@ -168,7 +180,6 @@ void Controller::run()
     {
         UserInterface::printMainMenu();
         choice = getUserChoiceInt();
-
         switch (choice)
         {
         case 1:
@@ -178,10 +189,9 @@ void Controller::run()
             fileControl();
             break;
         case 3:
-            //open sim
             sim.start();
             break;
-        case 4:
+        case 4: break;
         default:
             UserInterface::printError("Invalid Choice");
             break;

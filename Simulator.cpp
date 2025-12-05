@@ -215,26 +215,15 @@ void interactiveMode()
  */
 int start()
 {
-    //TODO: include the userinterface.
-    //TODO: Integrate into UserInterface.cpp
-    
-    Controller controller;
-    controller.run();
     std::cout << "=== Mecanum Car GUI / Visualizer ===\n\n";
     std::cout << "1) Run demo path\n";
     std::cout << "2) Interactive mode\n";
     std::cout << "Choice: ";
-
-    //TODO:Integrate into the controller get inputs.
-    // TODO: choice (INT)
-    //TODO: inlcude the controller class.
     int choice = 0;
     std::cin >> choice;
-
     if (!std::cin) {
         return 0;
     }
-
     if (choice == 1) {
         Car car;
         car.cameraOn();
@@ -243,7 +232,6 @@ int start()
     } else {
         interactiveMode();
     }
-
     std::cout << "Exiting visualizer.\n";
     return 0;
 }
