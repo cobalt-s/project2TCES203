@@ -4,51 +4,39 @@
 #include "LogFile.h"
 #include "UserInterface.h"
 #include "Car.h"
+#include "Simulator.h"
 
-void Controller::run()
+/**
+ * Main car controller class for running the RC cars
+ * 
+ * Jonathan Lee, Cobalt Stamey
+ * TCES 203 A
+ * Project 2
+ */
+
+/**
+ *  Gets the users choice.
+ * @return the users choice as a char
+ */
+char Controller::getUserChoiceChar()
 {
-    int choice = 0;
-    do
-    {
-        UserInterface::printMainMenu();
-        choice = getUserChoiceInt();
-
-        switch (choice)
-        {
-        case 1:
-            userControl();
-            break;
-        case 2:
-            fileControl();
-            break;
-        case 3:
-            break;
-        default:
-            UserInterface::printError("Invalid Choice");
-            break;
-        }
-    } while (choice != 3);
-
-    UserInterface::printInfo("Exiting Program");
-}
-
-void Controller::userControl()
-{
-    Car currentCar;
-    LogFile logger;
-    UserInterface::printInfo("Entering User Control mode.");
-
+    std::cout << "Enter your choice(CHAR): ";
     char choice;
-    do
-    {
-        UserInterface::printActionMenu();
-        choice = getUserChoiceChar();
-        Controller::carAction(choice, logger, currentCar);
-    } while (choice != 'X');
 
-    UserInterface::printInfo("Exiting User Control mode.");
+    if (!(std::cin >> choice))
+    {
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        UserInterface::printError("Please enter a valid number.");
+        return -1;
+    }
+
+    return choice;
 }
 
+/**
+ * 
+ */
 void Controller::fileControl()
 {
     UserInterface::printInfo("Entering File Control mode.");
@@ -80,30 +68,13 @@ void Controller::fileControl()
     UserInterface::printInfo("Exiting File Control mode.");
 }
 
+/**
+ * 
+ */
 int Controller::getUserChoiceInt()
 {
     std::cout << "Enter your choice (INT): ";
     int choice;
-
-    if (!(std::cin >> choice))
-    {
-        std::cin.clear();
-        std::cin.ignore(10000, '\n');
-        UserInterface::printError("Please enter a valid number.");
-        return -1;
-    }
-
-    return choice;
-}
-
-/**
- *  Gets the users choice.
- * @return the users choice as a char
- */
-char Controller::getUserChoiceChar()
-{
-    std::cout << "Enter your choice(CHAR): ";
-    char choice;
 
     if (!(std::cin >> choice))
     {
@@ -176,4 +147,56 @@ void Controller::carAction(const char action, LogFile &logger, Car &currentCar)
                   << "Invalid action" << "\n";
         break;
     }
+}
+
+/**
+ * 
+ */
+void Controller::userControl()
+{
+    Car currentCar;
+    LogFile logger;
+    UserInterface::printInfo("Entering User Control mode.");
+
+    char choice;
+    do
+    {
+        UserInterface::printActionMenu();
+        choice = getUserChoiceChar();
+        Controller::carAction(choice, logger, currentCar);
+    } while (choice != 'X');
+
+    UserInterface::printInfo("Exiting User Control mode.");
+}
+
+/**
+ * 
+ */
+void Controller::run()
+{
+    int choice = 0;
+    Simulator sim;
+    do
+    {
+        UserInterface::printMainMenu();
+        choice = getUserChoiceInt();
+        switch (choice)
+        {
+        case 1:
+            userControl();
+            break;
+        case 2:
+            fileControl();
+            break;
+        case 3:
+            sim.start();
+            break;
+        case 4: break;
+        default:
+            UserInterface::printError("Invalid Choice");
+            break;
+        }
+    } while (choice != 4);
+
+    UserInterface::printInfo("Exiting Program");
 }

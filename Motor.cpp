@@ -124,6 +124,10 @@ Direction Motor::getDirection() const
     return direction;
 }
 
+int Motor::getSpeedPercent() {
+    return speedPercent;
+}
+
 /**
  * Used to turn on the car's motor.
  */
