@@ -4,33 +4,15 @@
 #include "LogFile.h"
 #include "UserInterface.h"
 #include "Car.h"
+#include "Simulator.h"
 
-void Controller::run()
-{
-    int choice = 0;
-    do
-    {
-        UserInterface::printMainMenu();
-        choice = getUserChoiceInt();
-
-        switch (choice)
-        {
-        case 1:
-            userControl();
-            break;
-        case 2:
-            fileControl();
-            break;
-        case 3:
-            break;
-        default:
-            UserInterface::printError("Invalid Choice");
-            break;
-        }
-    } while (choice != 3);
-
-    UserInterface::printInfo("Exiting Program");
-}
+/**
+ * Main car controller class for running the RC cars
+ * 
+ * Jonathan Lee, Cobalt Stamey
+ * TCES 203 A
+ * Project 2
+ */
 
 void Controller::userControl()
 {
@@ -176,4 +158,35 @@ void Controller::carAction(const char action, LogFile &logger, Car &currentCar)
                   << "Invalid action" << "\n";
         break;
     }
+}
+
+void Controller::run()
+{
+    int choice = 0;
+    Simulator sim;
+    do
+    {
+        UserInterface::printMainMenu();
+        choice = getUserChoiceInt();
+
+        switch (choice)
+        {
+        case 1:
+            userControl();
+            break;
+        case 2:
+            fileControl();
+            break;
+        case 3:
+            //open sim
+            sim.start();
+            break;
+        case 4:
+        default:
+            UserInterface::printError("Invalid Choice");
+            break;
+        }
+    } while (choice != 4);
+
+    UserInterface::printInfo("Exiting Program");
 }

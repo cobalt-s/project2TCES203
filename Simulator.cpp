@@ -213,7 +213,7 @@ void interactiveMode()
 /**
  * Main method for running the simulator
  */
-int main()
+int start()
 {
     //TODO: include the userinterface.
     //TODO: Integrate into UserInterface.cpp
