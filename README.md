@@ -54,7 +54,7 @@ Motor.cpp \
 Controller.cpp \
 UserInterface.cpp \
 LogFile.cpp \
--o car_project```
+-o car_project -lpigpio -lrt```
 
 then do 
 ./car_project
