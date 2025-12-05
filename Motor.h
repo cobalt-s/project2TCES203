@@ -56,6 +56,7 @@ public:
     bool initialize(int in1, int in2);
     void setDirection(Direction newDirection);
     Direction getDirection() const;
+    int getSpeedPercent();
 
     void enable();
     void disable();
