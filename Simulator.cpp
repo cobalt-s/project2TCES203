@@ -6,6 +6,7 @@
 #include "Car.h"
 #include "Motor.h"
 #include "UserInterface.h"
+#include "Controller.h"
 
 /**
  * Simulator for an RC Car's functionality by running it through a 2D grid.
@@ -216,6 +217,9 @@ int main()
 {
     //TODO: include the userinterface.
     //TODO: Integrate into UserInterface.cpp
+    
+    Controller controller;
+    controller.run();
     std::cout << "=== Mecanum Car GUI / Visualizer ===\n\n";
     std::cout << "1) Run demo path\n";
     std::cout << "2) Interactive mode\n";
