@@ -11,6 +11,7 @@ namespace UserInterface {
     void printActionMenu();
     void printExampleMenu();
     void printSimulationMenu();
+    void printSimulationInteractiveModeMenu();
 
     void printError(const std::string& message);
     void printInfo(const std::string& message);

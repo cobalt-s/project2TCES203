@@ -1,14 +1,14 @@
-#include <iostream>
-#include <iomanip>
-#include <thread>
 #include <chrono>
 #include <cmath>
+#include <iomanip>
+#include <iostream>
+#include <thread>
 
 #include "Simulator.h"
 #include "Car.h"
+#include "Controller.h"
 #include "Motor.h"
 #include "UserInterface.h"
-#include "Controller.h"
 
 /**
  * Simulator for an RC Car's functionality by running it through a 2D grid.
@@ -19,13 +19,13 @@
  */
 
 // Size of the "map" shown in the console.
-static const int MAP_WIDTH  = 21;
-static const int MAP_HEIGHT = 21;
+static constexpr int MAP_WIDTH  = 21;
+static constexpr int MAP_HEIGHT = 21;
 
 //constructor
 
 Simulator::Simulator()
-{}
+= default;
 
 /**
  * Convert world coordinates (x, y) to map indices.
@@ -60,10 +60,10 @@ void Simulator::drawMap(const Car& car)
               << ", y = " << car.getY()
               << ", heading = " << car.getHeadingDeg() << " deg)\n";
 
-    Motor fl = car.getFrontLeftMotor();
-    Motor fr = car.getFrontRightMotor();
-    Motor rl = car.getRearLeftMotor();
-    Motor rr = car.getRearRightMotor();
+    const Motor& fl = car.getFrontLeftMotor();
+    const Motor& fr = car.getFrontRightMotor();
+    const Motor& rl = car.getRearLeftMotor();
+    const Motor& rr = car.getRearRightMotor();
 
     std::cout << "Motors: \n";
     std::cout << "  " << fl.getName() << "  speed = " << fl.getSpeedPercent()
@@ -143,23 +143,9 @@ void Simulator::interactiveMode()
 
     while (true) {
         drawMap(car);
-        std::cout << "Commands:\n";
-        std::cout << "  w d  : Move Forward  by d units\n";
-        std::cout << "  s d  : Move Backward by d units\n";
-        std::cout << "  a d  : Strafe Left    by d units\n";
-        std::cout << "  d d  : Strafe Right  by d units\n";
-        std::cout << "  q a  : Rotate Left    by a degrees\n";
-        std::cout << "  e a  : Rotate Right  by a degrees\n";
-        std::cout << "  c    : Toggle Camera On/Off\n";
-        std::cout << "  x    : Stop All Motors\n";
-        std::cout << "  z    : Quit\n\n";
-
+        UserInterface::printSimulationInteractiveModeMenu();
         std::cout << "Enter command: ";
-        std::cin >> cmd;
-
-        if (!std::cin) {
-            return;
-        }
+        cmd = Controller::getUserChoiceChar();
 
         if (cmd == 'z') {
             break;

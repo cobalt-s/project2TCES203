@@ -16,6 +16,12 @@ class Controller {
         * @return int: the users choice
         */
         static int getUserChoiceInt();
+
+        /**
+         * gets the user choice in CHAR format
+         * @return char: the users choice
+         */
+        static char getUserChoiceChar();
     private:
         /**
          * User control for the car.
@@ -29,11 +35,7 @@ class Controller {
 
 
 
-        /**
-         * gets the user choice in CHAR format
-         * @return char: the users choice
-         */
-        static char getUserChoiceChar();
+
 
         /**
          * Moves the car based on a action.

@@ -13,11 +13,11 @@ class Car;   // forward declaration so we can use Car& and const Car&
 class Simulator {
 public:
     Simulator();
-    void worldToMap(double x, double y, int& outRow, int& outCol);
-    void drawMap(const Car& car);
-    void runDemoPath(Car& car);
-    void interactiveMode();
-    int startSimulator();
+    static void worldToMap(double x, double y, int& outRow, int& outCol);
+    static void drawMap(const Car& car);
+    static void runDemoPath(Car& car);
+    static void interactiveMode();
+    static int startSimulator();
 };
 
 #endif

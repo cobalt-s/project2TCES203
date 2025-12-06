@@ -97,4 +97,18 @@ namespace UserInterface
         std::cout << "Choice: ";
     }
 
+    void printSimulationInteractiveModeMenu()
+    {
+        std::cout << "Commands:\n";
+        std::cout << "w : Move Forward by d units\n";
+        std::cout << "s : Move Backward by d units\n";
+        std::cout << "a : Strafe Left by d units\n";
+        std::cout << "d : Strafe Right  by d units\n";
+        std::cout << "q : Rotate Left    by a degrees\n";
+        std::cout << "e : Rotate Right  by a degrees\n";
+        std::cout << "c : Toggle Camera On/Off\n";
+        std::cout << "x : Stop All Motors\n";
+        std::cout << "z : Quit\n\n";
+    }
+
 }
