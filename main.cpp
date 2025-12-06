@@ -9,8 +9,7 @@
 
 int main()
 {
-  Controller controller;
-  controller.run();
+  Controller::run();
   return 0;
 }
 

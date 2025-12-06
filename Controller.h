@@ -10,6 +10,12 @@ class Controller {
          * Main run for the controller.
          */
         static void run();
+
+        /**
+        * gets the user choice in INT format
+        * @return int: the users choice
+        */
+        static int getUserChoiceInt();
     private:
         /**
          * User control for the car.
@@ -21,11 +27,7 @@ class Controller {
          */
         static void fileControl();
 
-        /**
-         * gets the user choice in INT format
-         * @return int: the users choice
-         */
-        static int getUserChoiceInt();
+
 
         /**
          * gets the user choice in CHAR format

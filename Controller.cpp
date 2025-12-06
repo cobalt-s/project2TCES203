@@ -189,7 +189,7 @@ void Controller::run()
             fileControl();
             break;
         case 3:
-            sim.start();
+            sim.startSimulator();
             break;
         case 4: break;
         default:

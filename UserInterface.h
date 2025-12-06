@@ -10,6 +10,7 @@ namespace UserInterface {
     void printMainMenu();
     void printActionMenu();
     void printExampleMenu();
+    void printSimulationMenu();
 
     void printError(const std::string& message);
     void printInfo(const std::string& message);

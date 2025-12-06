@@ -89,4 +89,12 @@ namespace UserInterface
         }
     }
 
+    void printSimulationMenu()
+    {
+        std::cout << "=== Mecanum Car GUI / Visualizer ===\n\n";
+        std::cout << "1) Run demo path\n";
+        std::cout << "2) Interactive mode\n";
+        std::cout << "Choice: ";
+    }
+
 }

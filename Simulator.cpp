@@ -3,6 +3,8 @@
 #include <thread>
 #include <chrono>
 #include <cmath>
+
+#include "Simulator.h"
 #include "Car.h"
 #include "Motor.h"
 #include "UserInterface.h"
@@ -10,8 +12,8 @@
 
 /**
  * Simulator for an RC Car's functionality by running it through a 2D grid.
- * 
- * Jonathan Lee, Cobalt, Stamey
+ *
+ * Jonathan Lee, Cobalt Stamey
  * Project 2
  * TCES 203 A
  */
@@ -20,11 +22,17 @@
 static const int MAP_WIDTH  = 21;
 static const int MAP_HEIGHT = 21;
 
+//constructor
+
+Simulator::Simulator()
+{}
+
 /**
  * Convert world coordinates (x, y) to map indices.
  * We assume the world origin (0,0) is at the center of the map.
+ * @param
  */
-void worldToMap(double x, double y, int& outRow, int& outCol)
+void Simulator::worldToMap(double x, double y, int& outRow, int& outCol)
 {
     int centerRow = MAP_HEIGHT / 2;
     int centerCol = MAP_WIDTH / 2;
@@ -37,7 +45,7 @@ void worldToMap(double x, double y, int& outRow, int& outCol)
 /**
  * Draw a simple ASCII map with the car at its current position.
  */
-void drawMap(const Car& car)
+void Simulator::drawMap(const Car& car)
 {
     int carRow = 0;
     int carCol = 0;
@@ -52,7 +60,7 @@ void drawMap(const Car& car)
               << ", y = " << car.getY()
               << ", heading = " << car.getHeadingDeg() << " deg)\n";
 
-    Motor fl = car.getFrontLeftMotor(); //TO
+    Motor fl = car.getFrontLeftMotor();
     Motor fr = car.getFrontRightMotor();
     Motor rl = car.getRearLeftMotor();
     Motor rr = car.getRearRightMotor();
@@ -86,7 +94,7 @@ void drawMap(const Car& car)
 /**
  * Simple scripted demo path for the car.
  */
-void runDemoPath(Car& car)
+void Simulator::runDemoPath(Car& car)
 {
     using namespace std::chrono_literals;
 
@@ -125,7 +133,7 @@ void runDemoPath(Car& car)
 /**
  * Gives the user a set of options on how to control the car.
  */
-void interactiveMode()
+void Simulator::interactiveMode()
 {
     Car car;
     car.cameraOn(); // just to show that camera can be turned on/off
@@ -158,10 +166,6 @@ void interactiveMode()
         }
 
         if (cmd == 'c') {
-            // Toggle camera.
-            // We cannot directly read camera state,
-            // but we know startStream()/stopStream() exist.
-            // For simplicity, just call start or stop alternatively.
             static bool cameraOnFlag = true;
             if (cameraOnFlag) {
                 car.cameraOff();
@@ -203,8 +207,8 @@ void interactiveMode()
         case 'e':
             car.rotateRight(value);
             break;
-        default:
-            std::cout << "Unknown command.\n";
+            default:
+            UserInterface::printError("Invalid command.");
             break;
         }
     }
@@ -213,25 +217,20 @@ void interactiveMode()
 /**
  * Main method for running the simulator
  */
-int start()
+int Simulator::startSimulator()
 {
-    std::cout << "=== Mecanum Car GUI / Visualizer ===\n\n";
-    std::cout << "1) Run demo path\n";
-    std::cout << "2) Interactive mode\n";
-    std::cout << "Choice: ";
+    UserInterface::printSimulationMenu();
     int choice = 0;
-    std::cin >> choice;
-    if (!std::cin) {
-        return 0;
-    }
+    choice = Controller::getUserChoiceInt();
     if (choice == 1) {
         Car car;
         car.cameraOn();
         runDemoPath(car);
-        std::cout << "Demo finished.\n";
+        UserInterface::printInfo("Demo finished.");
+        return 1;
     } else {
         interactiveMode();
     }
-    std::cout << "Exiting visualizer.\n";
+    UserInterface::printInfo("Exiting visualizer.");
     return 0;
 }

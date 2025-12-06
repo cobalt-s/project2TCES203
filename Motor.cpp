@@ -124,7 +124,7 @@ Direction Motor::getDirection() const
     return direction;
 }
 
-int Motor::getSpeedPercent() {
+int Motor::getSpeedPercent() const {
     return speedPercent;
 }
 
